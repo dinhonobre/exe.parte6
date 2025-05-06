@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import Entrega from "../../components/Entrega";
 import Pagamento from "../../components/Pagamento";
 import Confirmacao from "../../components/Confirmacao";
+import RestauranteModal from "../../components/RestauranteModal";
 
 type Produto = {
   id: number;
@@ -72,6 +73,9 @@ const Perfil = () => {
   const [mostrarEntrega, setMostrarEntrega] = useState(false);
   const [mostrarPagamento, setMostrarPagamento] = useState(false);
   const [mostrarConfirmacao, setMostrarConfirmacao] = useState(false);
+  const [restauranteSelecionado, setRestauranteSelecionado] =
+    useState<any>(null);
+  const [modalRestauranteAberto, setModalRestauranteAberto] = useState(false);
 
   useEffect(() => {
     if (itensCarrinho.length === 0) {
@@ -99,23 +103,44 @@ const Perfil = () => {
   };
 
   const abrirEntrega = () => {
-    setCarrinhoAberto(false); // Fecha o carrinho
-    setMostrarEntrega(true); // Mostra a tela de entrega
+    setCarrinhoAberto(false);
+    setMostrarEntrega(true);
   };
 
   const abrirPagamento = () => {
-    setMostrarEntrega(false); // Fecha a tela de entrega
-    setMostrarPagamento(true); // Mostra a tela de pagamento
+    setMostrarEntrega(false);
+    setMostrarPagamento(true);
   };
 
   const fecharPagamento = () => {
     setMostrarPagamento(false);
-    setMostrarConfirmacao(true); // Abre a tela de confirmação ao fechar o pagamento
+    setMostrarConfirmacao(true);
   };
 
   const fecharConfirmacao = () => {
     setMostrarConfirmacao(false);
     // Lógica para resetar o estado do pedido/carrinho, se necessário
+  };
+
+  const handleComprarRestaurante = async (restauranteId: string) => {
+    try {
+      const response = await fetch(
+        `https://fake-api-tau.vercel.app/api/efood/restaurantes/${restauranteId}`
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setRestauranteSelecionado(data);
+      setModalRestauranteAberto(true);
+    } catch (error) {
+      console.error("Erro ao buscar dados do restaurante:", error);
+    }
+  };
+
+  const fecharModalRestaurante = () => {
+    setModalRestauranteAberto(false);
+    setRestauranteSelecionado(null);
   };
 
   return (
@@ -128,13 +153,14 @@ const Perfil = () => {
         !mostrarConfirmacao && <Overlay />}
       {mostrarConfirmacao && <Overlay />}
       <Container carrinhoAberto={carrinhoAberto}>
-        {produtos.map((produto) => (
+        {produtos.map((produto, index) => (
           <CardPerfil
             key={produto.id}
             titulo={produto.titulo}
             descricao={produto.descricao}
             imagem={produto.imagem}
             aoAbrirModal={abrirModal}
+            aoComprar={() => handleComprarRestaurante((index + 1).toString())}
           />
         ))}
       </Container>
@@ -147,6 +173,13 @@ const Perfil = () => {
             setModalAberto(false);
             setCarrinhoAberto(true);
           }}
+        />
+      )}
+      {console.log("Valor de modalRestauranteAberto antes da renderização:", modalRestauranteAberto)}
+      {modalRestauranteAberto && (
+        <RestauranteModal
+          restaurante={restauranteSelecionado}
+          onClose={fecharModalRestaurante}
         />
       )}
 
@@ -165,16 +198,17 @@ const Perfil = () => {
         />
       )}
 
-{mostrarPagamento && (
-  <Pagamento
-    onFecharPagamento={fecharPagamento}
-    onConfirmarPagamento={() => setMostrarConfirmacao(true)}
-    onVoltarParaEntrega={() => { // Passa a função para voltar à Entrega
-      setMostrarPagamento(false);
-      setMostrarEntrega(true);
-    }}
-  />
-)}
+      {mostrarPagamento && (
+        <Pagamento
+          onFecharPagamento={fecharPagamento}
+          onConfirmarPagamento={() => setMostrarConfirmacao(true)}
+          onVoltarParaEntrega={() => {
+            // Passa a função para voltar à Entrega
+            setMostrarPagamento(false);
+            setMostrarEntrega(true);
+          }}
+        />
+      )}
 
       {mostrarConfirmacao && (
         <Confirmacao onFecharConfirmacao={fecharConfirmacao} />

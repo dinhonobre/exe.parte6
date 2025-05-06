@@ -39,7 +39,24 @@ export const CardDescricao = styled.p`
 `
 
 export const CardBotao = styled.button`
-  width: 100%;
+  width: 50%;
+  padding: 10px;
+  background-color: #FFEBD9;
+  color: #E66767;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #d14d4d;
+    color: #FFEBD9;
+  }
+`
+
+export const BotaoComprar = styled.button`
+   width: 50%;
   padding: 10px;
   background-color: #FFEBD9;
   color: #E66767;
