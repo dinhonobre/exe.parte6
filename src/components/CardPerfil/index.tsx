@@ -1,27 +1,52 @@
-import React from 'react';
-import { Card, CardImagem, CardTitulo, CardDescricao, CardBotao, BotaoComprar } from './styles'; // Importe o BotaoComprar (se você já o estilizou)
+import React from "react";
+import {
+  Card,
+  CardImagem,
+  CardTitulo,
+  CardDescricao,
+  CardBotao,
+  BotaoComprar,
+} from "./styles";
+import { Produto } from "../../models/Produto";
 
 type Props = {
+  id: number;
   titulo: string;
   descricao: string;
   imagem: string;
-  aoAbrirModal: () => void;
+  preco: string;
+  aoAdicionarAoCarrinho: (produto: Produto) => void;
   aoComprar: (id: string) => void;
 };
 
-const CardPerfil = ({ titulo, descricao, imagem, aoAbrirModal, aoComprar }: Props) => {
-  // Supondo que você tenha ou importe um styled component chamado BotaoComprar
+const CardPerfil = ({
+  id,
+  titulo,
+  descricao,
+  imagem,
+  preco,
+  aoAdicionarAoCarrinho,
+  aoComprar,
+}: Props) => {
   return (
     <Card>
       <CardImagem src={imagem} alt={titulo} />
       <CardTitulo>{titulo}</CardTitulo>
       <CardDescricao>{descricao}</CardDescricao>
-      <div style={{ display: 'flex', gap: '10px' }}> {/* Container para os botões */}
-        <CardBotao onClick={aoAbrirModal}>Adicionar ao carrinho</CardBotao>
-        <BotaoComprar onClick={() => aoComprar('1')}>Comprar</BotaoComprar>
+      <div style={{ display: "flex", gap: "10px" }}>
+        <CardBotao
+          onClick={() =>
+            aoAdicionarAoCarrinho({ id, titulo, descricao, preco, imagem })
+          }
+        >
+          Adicionar ao carrinho
+        </CardBotao>
+        <BotaoComprar onClick={() => aoComprar(id.toString())}>
+          Comprar
+        </BotaoComprar>
       </div>
     </Card>
   );
 };
 
-export default CardPerfil
+export default CardPerfil;

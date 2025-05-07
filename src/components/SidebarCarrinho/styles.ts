@@ -12,6 +12,18 @@ export const Sidebar = styled.aside`
   overflow-y: none;
 `;
 
+export const SidebarFundo = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo semitransparente */
+  display: flex;
+  justify-content: flex-end; /* Alinha a sidebar à direita */
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+`;
+
 export const Item = styled.div`
   width: 344px;
   height: 100px;

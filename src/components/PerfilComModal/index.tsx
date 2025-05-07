@@ -6,7 +6,7 @@ type Produto = {
   id: number;
   titulo: string;
   descricao: string;
-  preco: number;
+  preco: string;
   imagem: string;
 };
 
@@ -20,7 +20,7 @@ const PerfilComModal = ({ onClose, aoAdicionar }: Props) => {
     id: 1,
     titulo: "Pizza Marguerita",
     descricao: "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    preco: 29.90,
+    preco: String(29.90),
     imagem: imagemPerfil,
   };
 

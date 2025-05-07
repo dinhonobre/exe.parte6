@@ -12,6 +12,8 @@ import Entrega from "../../components/Entrega";
 import Pagamento from "../../components/Pagamento";
 import Confirmacao from "../../components/Confirmacao";
 import RestauranteModal from "../../components/RestauranteModal";
+import { useDispatch } from "react-redux";
+import { adicionarAoCarrinho as adicionarAoCarrinhoAction } from "../../store/carrinhoSlice";
 
 type Produto = {
   id: number;
@@ -21,61 +23,25 @@ type Produto = {
   imagem: string;
 };
 
-const produtos = [
-  {
-    id: 1,
-    titulo: "Pizza Marguerita",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-  },
-  {
-    id: 2,
-    titulo: "Pizza Marguerita",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-  },
-  {
-    id: 3,
-    titulo: "Pizza Marguerita",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-  },
-  {
-    id: 4,
-    titulo: "Pizza Marguerita",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-  },
-  {
-    id: 5,
-    titulo: "Pizza Marguerita",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-  },
-  {
-    id: 6,
-    titulo: "Pizza Marguerita",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-  },
+const produtos: Produto[] = [
+  { id: 1, titulo: "Pizza Marguerita 1", descricao: "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!", imagem: imagemPerfil, preco: "39.90" },
+  { id: 2, titulo: "Pizza Marguerita 2", descricao: "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!", imagem: imagemPerfil, preco: "42.50" },
+  { id: 3, titulo: "Pizza Marguerita 3", descricao: "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!", imagem: imagemPerfil, preco: "35.00" },
+  { id: 4, titulo: "Pizza Marguerita 4", descricao: "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!", imagem: imagemPerfil, preco: "45.99" },
+  { id: 5, titulo: "Pizza Marguerita 5", descricao: "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!", imagem: imagemPerfil, preco: "38.75" },
+  { id: 6, titulo: "Pizza Marguerita 6", descricao: "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!", imagem: imagemPerfil, preco: "41.20" },
 ];
 
 const Perfil = () => {
   const [modalAberto, setModalAberto] = useState(false);
-  const [carrinhoAberto, setCarrinhoAberto] = useState(false);
+  const [carrinhoAberto, setCarrinhoAberto] = useState(false); // Estado para controlar a visibilidade do carrinho
   const [itensCarrinho, setItensCarrinho] = useState<Produto[]>([]);
   const [mostrarEntrega, setMostrarEntrega] = useState(false);
   const [mostrarPagamento, setMostrarPagamento] = useState(false);
   const [mostrarConfirmacao, setMostrarConfirmacao] = useState(false);
-  const [restauranteSelecionado, setRestauranteSelecionado] =
-    useState<any>(null);
+  const [restauranteSelecionado, setRestauranteSelecionado] = useState<any>(null);
   const [modalRestauranteAberto, setModalRestauranteAberto] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (itensCarrinho.length === 0) {
@@ -83,23 +49,10 @@ const Perfil = () => {
     }
   }, [itensCarrinho]);
 
-  const adicionarAoCarrinho = (produto: any) => {
-    setItensCarrinho((prevItens) => [...prevItens, produto]);
-  };
-
-  const removerDoCarrinho = (id: number) => {
-    setItensCarrinho((prevItens) =>
-      prevItens.filter((produto) => produto.id !== id)
-    );
-  };
-
-  const abrirModal = () => {
-    setModalAberto(true);
-  };
-
-  const fecharModalEAbrirCarrinho = () => {
-    setModalAberto(false);
-    setCarrinhoAberto(true);
+  const adicionarAoCarrinhoRedux = (produto: Produto) => {
+    console.log("Dispatching adicionarAoCarrinho:", produto);
+    dispatch(adicionarAoCarrinhoAction(produto));
+    setCarrinhoAberto(true); 
   };
 
   const abrirEntrega = () => {
@@ -124,9 +77,7 @@ const Perfil = () => {
 
   const handleComprarRestaurante = async (restauranteId: string) => {
     try {
-      const response = await fetch(
-        `https://fake-api-tau.vercel.app/api/efood/restaurantes/${restauranteId}`
-      );
+      const response = await fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${restauranteId}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -143,24 +94,29 @@ const Perfil = () => {
     setRestauranteSelecionado(null);
   };
 
+  const fecharCarrinho = () => { // <------------------- FUNÇÃO PARA FECHAR O CARRINHO
+    setCarrinhoAberto(false);
+  };
+
   return (
     <>
       <PerfilHeader />
       <Apresentacao />
-      {carrinhoAberto &&
-        !mostrarEntrega &&
-        !mostrarPagamento &&
-        !mostrarConfirmacao && <Overlay />}
+      {carrinhoAberto && !mostrarEntrega && !mostrarPagamento && !mostrarConfirmacao && (
+        <Overlay onClick={fecharCarrinho} /> // <---- Passe a função para fechar ao clicar fora
+      )}
       {mostrarConfirmacao && <Overlay />}
       <Container carrinhoAberto={carrinhoAberto}>
-        {produtos.map((produto, index) => (
+        {produtos.map((produto) => (
           <CardPerfil
             key={produto.id}
+            id={produto.id}
             titulo={produto.titulo}
             descricao={produto.descricao}
             imagem={produto.imagem}
-            aoAbrirModal={abrirModal}
-            aoComprar={() => handleComprarRestaurante((index + 1).toString())}
+            preco={produto.preco}
+            aoAdicionarAoCarrinho={adicionarAoCarrinhoRedux}
+            aoComprar={() => handleComprarRestaurante(produto.id.toString())}
           />
         ))}
       </Container>
@@ -168,8 +124,8 @@ const Perfil = () => {
       {modalAberto && (
         <PerfilComModal
           onClose={() => setModalAberto(false)}
-          aoAdicionar={(produto) => {
-            adicionarAoCarrinho(produto);
+          aoAdicionar={(prod) => {
+            adicionarAoCarrinhoRedux(prod);
             setModalAberto(false);
             setCarrinhoAberto(true);
           }}
@@ -177,25 +133,18 @@ const Perfil = () => {
       )}
       {console.log("Valor de modalRestauranteAberto antes da renderização:", modalRestauranteAberto)}
       {modalRestauranteAberto && (
-        <RestauranteModal
-          restaurante={restauranteSelecionado}
-          onClose={fecharModalRestaurante}
-        />
+        <RestauranteModal restaurante={restauranteSelecionado} onClose={fecharModalRestaurante} />
       )}
 
       {carrinhoAberto && !mostrarEntrega && !mostrarPagamento && (
         <SidebarCarrinho
-          aoRemover={removerDoCarrinho}
-          produtosCarrinho={itensCarrinho}
           aoContinuar={abrirEntrega}
+          onFechar={fecharCarrinho} // <---- Passe a função para fechar o carrinho
         />
       )}
 
       {mostrarEntrega && !mostrarPagamento && (
-        <Entrega
-          onVoltar={() => setMostrarEntrega(false)}
-          onContinuarPagamento={abrirPagamento}
-        />
+        <Entrega onVoltar={() => setMostrarEntrega(false)} onContinuarPagamento={abrirPagamento} />
       )}
 
       {mostrarPagamento && (
@@ -203,16 +152,13 @@ const Perfil = () => {
           onFecharPagamento={fecharPagamento}
           onConfirmarPagamento={() => setMostrarConfirmacao(true)}
           onVoltarParaEntrega={() => {
-            // Passa a função para voltar à Entrega
             setMostrarPagamento(false);
             setMostrarEntrega(true);
           }}
         />
       )}
 
-      {mostrarConfirmacao && (
-        <Confirmacao onFecharConfirmacao={fecharConfirmacao} />
-      )}
+      {mostrarConfirmacao && <Confirmacao onFecharConfirmacao={fecharConfirmacao} />}
 
       <Footer />
     </>
