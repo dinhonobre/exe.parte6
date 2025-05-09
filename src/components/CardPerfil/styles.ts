@@ -71,3 +71,24 @@ export const BotaoComprar = styled.button`
     color: #FFEBD9;
   }
 `
+
+export const Categoria = styled.span`
+  position: absolute;
+  width: 61px;
+  height: 26px;
+  top: 10px; /* Ajustei a posição para dentro da imagem */
+  left: 10px; /* Ajustei a posição para dentro da imagem */
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  background-color: #e66767;
+  color: #ffebd9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+`;
+

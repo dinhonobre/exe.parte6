@@ -6,6 +6,7 @@ import {
   CardDescricao,
   CardBotao,
   BotaoComprar,
+  Categoria,
 } from "./styles";
 import { Produto } from "../../models/Produto";
 
@@ -27,10 +28,14 @@ const CardPerfil = ({
   preco,
   aoAdicionarAoCarrinho,
   aoComprar,
-}: Props) => {
+}: Props) => { 
   return (
     <Card>
-      <CardImagem src={imagem} alt={titulo} />
+      <div style={{ position: "relative" }}>
+        {" "}
+        {/* Container para a imagem e a categoria */}
+        <CardImagem src={imagem} alt={titulo} />
+      </div>
       <CardTitulo>{titulo}</CardTitulo>
       <CardDescricao>{descricao}</CardDescricao>
       <div style={{ display: "flex", gap: "10px" }}>

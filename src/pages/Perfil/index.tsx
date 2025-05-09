@@ -139,7 +139,7 @@ const Perfil = () => {
       {carrinhoAberto && !mostrarEntrega && !mostrarPagamento && (
         <SidebarCarrinho
           aoContinuar={abrirEntrega}
-          onFechar={fecharCarrinho} // <---- Passe a função para fechar o carrinho
+          onFechar={fecharCarrinho}
         />
       )}
 

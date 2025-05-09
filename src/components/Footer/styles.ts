@@ -9,7 +9,7 @@ export const FooterContainer = styled.footer`
   align-items: center;
   justify-content: center;
   gap: 16px;
-  background-color:rgb(236, 181, 181);
+  background-color:#FFEBD9;
 `
 
 export const Logo = styled.img`
@@ -26,7 +26,7 @@ export const SocialIcons = styled.div`
   img {
     width: 24px;
     height: 24px;
-    filter: brightness(0) invert(1); // Deixa o ícone branco
+    color: #E66767;
   }
 `
 
@@ -35,7 +35,7 @@ export const FooterText = styled.p`
   text-align: center;
   font-family: 'Roboto', sans-serif;
   font-size: 10px;
-  color:#FFF;
+  color:#E66767;
   line-height: 1;
   margin-top: 16px;
 `

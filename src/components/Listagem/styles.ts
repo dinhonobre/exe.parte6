@@ -9,6 +9,11 @@ export const ListagemContainer = styled.div`
 `
 
 export const RestauranteCard = styled.div`
-  width: calc(50% - 20px); // Define o tamanho dos cards, ficando 2 por linha
-  max-width: 500px; // Tamanho máximo do card
-`
+  width: calc(50% - 20px);
+  max-width: 500px;
+
+  /* Para telas menores que um certo ponto (ex: 768px) */
+  @media (max-width: 768px) {
+    width: 100%; /* Ocupa a largura total em telas menores */
+  }
+`;
