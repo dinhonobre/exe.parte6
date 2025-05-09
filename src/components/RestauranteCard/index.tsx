@@ -11,6 +11,7 @@ interface Props {
 }
 
 const RestauranteCard = ({ imagem, titulo, nota, descricao, categoria }: Props) => {
+  console.log("RestauranteCard - URL da imagem:", imagem);
   return (
     <Card>
       <div style={{ position: 'relative' }}>
