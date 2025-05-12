@@ -39,7 +39,6 @@ export const Form = styled.div`
 export const Campo = styled.input`
   height: 32px;
   border: none;
-  border-radius: 4px;
   padding: 8px;
   font-size: 14px;
 `
@@ -61,17 +60,29 @@ export const BotaoConfirmar = styled.button`
   color: #E66767;
   font-weight: bold;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: #d14d4d;
+    color: #FFEBD9;
+  }
 `
 
 export const BotaoVoltar = styled.button`
-  margin-top: 24px;
+ margin-top: 24px;
   padding: 12px;
   background-color: #FFEBD9;
   color: #E66767;
   font-weight: bold;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: #d14d4d;
+    color: #FFEBD9;
+  }
 `

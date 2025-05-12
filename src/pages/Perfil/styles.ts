@@ -1,3 +1,4 @@
+// src/pages/Perfil/styles.ts
 import styled from 'styled-components';
 
 interface Props {
@@ -13,12 +14,12 @@ export const Container = styled.div<Props>`
   max-width: 1200px; /* Largura máxima para evitar que se estenda demais */
   margin: 50px auto; /* Centraliza horizontalmente com margens superior e inferior */
   background-color: #f8f9fa;
-  opacity: ${(props) => (props.carrinhoAberto ? 0.5 : 1)};
+  opacity: ${(props) => (props.carrinhoAberto ? 0.5 : 1)}; /* Opacidade ajustável */
   transition: opacity 0.3s ease;
   justify-items: center; /* Centraliza os itens horizontalmente dentro de cada célula da grid */
   align-items: center; /* Centraliza os itens verticalmente dentro de cada célula da grid */
 
-  /* Para telas menores que 768px (celulares) - Adapte conforme necessário */
+  /* Responsividade */
   @media (max-width: 768px) {
     grid-template-columns: 1fr; /* Uma coluna em telas menores */
     width: 90%;
@@ -26,9 +27,9 @@ export const Container = styled.div<Props>`
     gap: 15px;
   }
 
-  /* Para telas entre 768px e 1024px (tablets) - Adapte conforme necessário */
+  /* Para telas entre 768px e 1024px (tablets) */
   @media (min-width: 769px) and (max-width: 1024px) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adaptável a tablets */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adaptável para tablets */
     width: 95%;
     margin: 30px auto;
   }
@@ -45,7 +46,6 @@ export const Overlay = styled.div`
   transition: background-color 0.3s ease;
 `;
 
-
 export const Header = styled.header`
   width: 100%;
   max-width: 1366px;
@@ -58,24 +58,24 @@ export const Header = styled.header`
   background-color: #fff;
   flex-direction: row; /* Garante que os itens fiquem em linha */
 
-  /* Para telas menores que 768px (celulares) */
+  /* Responsividade */
   @media (max-width: 768px) {
     flex-direction: column; /* Empilha os itens em telas menores */
     align-items: flex-start; /* Alinha à esquerda em telas menores */
     padding: 10px 15px;
     height: auto; /* Ajusta a altura automaticamente */
   }
-`
+`;
 
 export const Logo = styled.img`
   width: 125px;
   height: auto;
 
-  /* Para telas menores que 768px (celulares) */
+  /* Responsividade */
   @media (max-width: 768px) {
-    width: 100px;
+    width: 100px; /* Logo menor em telas pequenas */
   }
-`
+`;
 
 export const TextoRestaurante = styled.h1`
   font-family: Roboto;
@@ -83,18 +83,14 @@ export const TextoRestaurante = styled.h1`
   font-size: 18px;
   text-align: center;
   color: #e66767;
+  margin-top: 10px;
 
-  /* Posição relativa removida para melhor fluxo responsivo */
-  position: static;
-  margin-top: 10px; /* Adiciona margem para espaçamento */
-  margin-left: 0;
-
-  /* Para telas menores que 768px (celulares) */
+  /* Responsividade */
   @media (max-width: 768px) {
     font-size: 16px;
-    text-align: left;
+    text-align: left; /* Alinha à esquerda em telas pequenas */
   }
-`
+`;
 
 export const CarrinhoTexto = styled.h2`
   font-family: Roboto;
@@ -102,46 +98,42 @@ export const CarrinhoTexto = styled.h2`
   font-size: 18px;
   text-align: right;
   color: #e66767;
+  margin-top: 10px;
 
-  /* Posição relativa removida para melhor fluxo responsivo */
-  position: static;
-  margin-top: 10px; /* Adiciona margem para espaçamento */
-  margin-left: 0;
-
-  /* Para telas menores que 768px (celulares) */
+  /* Responsividade */
   @media (max-width: 768px) {
     font-size: 16px;
-    text-align: left;
+    text-align: left; /* Alinha à esquerda em telas pequenas */
   }
-`
+`;
 
 export const ImagemApresentacao = styled.img`
   width: 100% !important;
   max-width: 1024px !important;
   height: auto !important;
   display: block !important;
-  margin: 20px auto !important; /* Adiciona margem vertical */
-`
+  margin: 20px auto !important;
+`;
 
 export const ProdutoContainer = styled.div`
   max-width: 1024px;
   margin: 20px auto; /* Margem vertical menor */
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px; /* Espaçamento menor */
+  gap: 10px; /* Espaçamento menor */
 
-  /* Para telas menores que 768px (celulares) */
+  /* Responsividade */
   @media (max-width: 768px) {
     grid-template-columns: 1fr; /* 1 coluna em telas menores */
     width: 90%;
   }
 
-  /* Para telas entre 768px e 1024px (tablets) */
+  /* Para tablets */
   @media (min-width: 769px) and (max-width: 1024px) {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     width: 95%;
   }
-`
+`;
 
 export const Card = styled.div`
   background-color: #fff;
@@ -151,46 +143,47 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: auto; /* Largura automática para se ajustar à grid */
-  height: auto; /* Altura automática para se ajustar ao conteúdo */
-`
+  width: 100%; /* Certificando-se de que o card ocupe a largura total do container */
+  max-width: 300px; /* Limite de largura para que os cards não estiquem muito */
+  height: auto;
+`;
 
 export const CardImagem = styled.img`
   width: 100%;
-  height: auto; /* Altura automática para manter a proporção */
+  height: auto;
   object-fit: cover;
   border-radius: 8px;
-  max-height: 200px; /* Altura máxima para evitar quebras de layout */
-`
+  max-height: 200px;
+`;
 
 export const CardTitulo = styled.h3`
   font-family: Roboto;
   font-weight: 700;
-  font-size: 16px; /* Fonte menor em telas menores */
+  font-size: 16px;
   color: #333;
   margin-top: 10px;
-  text-align: center; /* Centraliza o título */
-`
+  text-align: center;
+`;
 
 export const CardDescricao = styled.p`
   font-family: Roboto;
   font-weight: 400;
-  font-size: 12px; /* Fonte menor em telas menores */
+  font-size: 12px;
   color: #666;
   text-align: center;
   margin-top: 10px;
-`
+`;
 
 export const CardPreco = styled.p`
   font-family: Roboto;
   font-weight: 700;
-  font-size: 14px; /* Fonte menor em telas menores */
+  font-size: 14px;
   color: #e66767;
   margin-top: 10px;
-`
+`;
 
 export const CardBotao = styled.button`
-  padding: 8px 15px; /* Padding menor */
+  padding: 8px 15px;
   background-color: #e66767;
   color: #fff;
   border: none;
@@ -199,25 +192,25 @@ export const CardBotao = styled.button`
   margin-top: 10px;
   font-family: Roboto;
   font-weight: 700;
-  font-size: 12px; /* Fonte menor */
-`
+  font-size: 12px;
+`;
 
 export const Rodape = styled.footer`
   width: 100%;
-  height: auto; /* Altura automática */
+  height: auto;
   background-color: #f8f9fa;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   bottom: 0;
-  padding: 15px; /* Adiciona padding vertical */
-`
+  padding: 15px;
+`;
 
 export const RodapeTexto = styled.p`
   font-family: Roboto;
   font-weight: 400;
-  font-size: 12px; /* Fonte menor */
+  font-size: 12px;
   color: #333;
-  text-align: center; /* Centraliza o texto */
-`
+  text-align: center;
+`;

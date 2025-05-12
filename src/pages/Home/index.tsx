@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom'
-import logo from '../../assets/logo.png'
-import { HeroContainer, HeroText, Logo } from './styles'
-import Listagem from '../../components/Listagem'
-import Rodape from '../../components/Footer'
+import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.png';
+import { HeroContainer, HeroText, Logo } from './styles';
+import Listagem from '../../components/Listagem';
+import Rodape from '../../components/Footer';
+import fundo from '../../assets/fundo.png';
 
 const Home = () => (
   <>
-    <HeroContainer>
+    <HeroContainer backgroundImage={fundo}>
       <Logo src={logo} alt="Logo" />
       <HeroText>
         Viva experiências gastronômicas
@@ -15,9 +16,7 @@ const Home = () => (
     </HeroContainer>
     <Listagem />
     <Rodape />
-    {/* Link para acessar o Perfil */}
-    <Link to="/perfil">Ir para o Perfil</Link>
   </>
-)
+);
 
-export default Home
+export default Home;

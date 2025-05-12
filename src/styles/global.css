@@ -1,0 +1,91 @@
+:root {
+  --tamanho-texto-base: 16px;
+  --espacamento-padrao: 1rem;
+  --largura-maxima-conteudo: 1200px;
+  --altura-hero: 320px;
+  --fonte-padrao: 'Roboto', sans-serif; /* Fonte padrão */
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-padrao);
+  font-size: var(--tamanho-texto-base);  /* Tamanho base de texto */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: var(--largura-maxima-conteudo);
+  margin: 0 auto;
+  padding: 0 var(--espacamento-padrao);
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --tamanho-texto-base: 18px;
+    --espacamento-padrao: 1.5rem;
+    --altura-hero: 400px;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  h1 {
+    font-size: 3rem;  /* Ajuste do tamanho do título */
+    margin-bottom: 20px;  /* Espaçamento abaixo do título */
+  }
+
+  p {
+    font-size: 1.25rem;  /* Ajuste do tamanho do parágrafo */
+    margin-bottom: 15px;  /* Espaçamento abaixo do parágrafo */
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --largura-maxima-conteudo: 1400px;
+  }
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: var(--espacamento-padrao); /* Espaçamento abaixo do título */
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: var(--espacamento-padrao); /* Espaçamento abaixo do parágrafo */
+}
+
+/* Outros ajustes específicos podem ser feitos aqui */
+
+/* Para o layout de grid, com espaçamento menor entre os cards */
+.container .cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas de igual largura */
+  gap: 15px; /* Espaçamento entre os cards */
+}
+
+@media (max-width: 768px) {
+  .container .cards {
+    grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
+    gap: 10px; /* Menor espaçamento */
+  }
+}
+
+/* Estilo do Footer */
+footer {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  text-align: center;
+}
+
+footer p {
+  font-size: 0.875rem; /* Fonte menor no rodapé */
+  color: #333;
+}

@@ -15,7 +15,6 @@ const Listagem = () => {
       setError(null);
       try {
         const data = await getRestaurantes();
-        console.log("Dados dos restaurantes recebidos:", data);
         setRestaurantes(data);
       } catch (err: any) {
         setError(err.message);
@@ -38,15 +37,15 @@ const Listagem = () => {
   return (
     <ListagemContainer>
       {restaurantes.map((restaurante) => {
-        console.log("URL da imagem para o restaurante:", restaurante.urlImagem); // Adicionado para debug
+        console.log("Dados do restaurante:", restaurante);
         return (
           <RestauranteCard
             key={restaurante.id}
             imagem={restaurante.capa}
-            titulo={restaurante.nome}
-            nota={restaurante.nota}
+            titulo={restaurante.titulo}
+            nota={restaurante.avaliacao}
             descricao={restaurante.descricao}
-            categoria={restaurante.categoria}
+            categoria={restaurante.tipo}
           />
         );
       })}

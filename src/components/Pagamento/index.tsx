@@ -20,17 +20,14 @@ const Pagamento: React.FC<Props> = ({ onFecharPagamento, onConfirmarPagamento, o
             <CampoMenor placeholder="CVV" />
           </LinhaDupla>
           <BotaoConfirmar onClick={() => {
-            // Lógica para processar o pagamento (simulada aqui)
-            console.log('Pagamento Confirmado!');
             onConfirmarPagamento(); // Chama a FUNÇÃO RECEBIDA COMO PROP
           }}>
-            Confirmar Pagamento
+            Finalizar Pagamento
           </BotaoConfirmar>
           <BotaoVoltar onClick={() => {
-            console.log('Voltar para Entrega!');
             onVoltarParaEntrega(); // Chama a FUNÇÃO RECEBIDA COMO PROP
           }}>
-            Voltar
+            Voltar para Edição de Endereço
           </BotaoVoltar>
         </Form>
       </SidebarEntrega>

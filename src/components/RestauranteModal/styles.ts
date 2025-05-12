@@ -1,4 +1,3 @@
-// src/components/RestauranteModal/styles.ts
 import styled from 'styled-components';
 
 export const ModalOverlay = styled.div`
@@ -12,24 +11,107 @@ export const ModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
 `;
 
 export const ModalContainer = styled.div`
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 80%;
-  max-width: 600px;
   position: relative;
+  width: 1024px;
+  height: 344px;
+  background: #E66767;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  display: flex;
+  flex-direction: row;
+  padding: 32px;
+  box-sizing: border-box;
+
+  /* Ajustes para responsividade */
+  @media (max-width: 1200px) {
+    width: 90%;
+    left: 5%;
+    top: 30%;
+  }
 `;
 
 export const CloseButton = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
+  top: 8px;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  background: transparent;
   border: none;
-  font-size: 1.5em;
+  color: #fff;
+  font-size: 16px;
+  line-height: 16px;
   cursor: pointer;
 `;
+
+export const AddButton = styled.button`
+  width: 218px;
+  height: 24px;
+  background: #FFEBD9;
+  border: none;
+  margin-top: auto; 
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ButtonText = styled.span`
+  font-family: Roboto;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  color: #E66767;
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+`;
+
+export const Image = styled.img`
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+`;
+
+export const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-start;
+`;
+
+export const Title = styled.h2`
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 0 0 8px;
+  text-align: left;
+`;
+
+export const Description = styled.p`
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0;
+  color: #FFFFFF;
+  margin: 0 0 16px;
+`;
+

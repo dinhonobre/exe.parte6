@@ -1,47 +1,34 @@
-import React from "react";
-import { FundoEscuro, Modal, Imagem, Conteudo, Texto, BotaoAdicionar, BotaoFechar } from './styles';
-import imagemPerfil from '../../assets/imagemPerfil.png';
-
-type Produto = {
-  id: number;
-  titulo: string;
-  descricao: string;
-  preco: string;
-  imagem: string;
-};
+import React, { useState } from "react";
+import { Modal, ModalContent, ModalTitle, ModalDescricao, ModalPreco, ModalBotao } from "./styles";
+import { Produto } from "../../models/Produto";
 
 type Props = {
+  produto: Produto; // Espera um objeto Produto em vez de 'any'
   onClose: () => void;
-  aoAdicionar: (produto: Produto) => void;
+  aoAdicionarAoCarrinho: () => void;
+  loading: boolean;
 };
 
-const PerfilComModal = ({ onClose, aoAdicionar }: Props) => {
-  const produto = {
-    id: 1,
-    titulo: "Pizza Marguerita",
-    descricao: "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    preco: String(29.90),
-    imagem: imagemPerfil,
-  };
-
-  const adicionarCarrinho = () => {
-    aoAdicionar(produto);
-    onClose(); 
-  };
+const PerfilComModal = ({ produto, onClose, aoAdicionarAoCarrinho, loading }: Props) => {
+  if (loading) {
+    return <div>Loading...</div>; // Exibe um loading enquanto os dados estão sendo carregados
+  }
 
   return (
-    <FundoEscuro>
-      <Modal>
-        <BotaoFechar onClick={onClose}>×</BotaoFechar>
-        <Imagem src={produto.imagem} alt="Imagem do produto" />
-        <Conteudo>
-          <Texto>{produto.descricao}</Texto>
-          <BotaoAdicionar onClick={adicionarCarrinho}>
-            Adicionar ao carrinho - {produto.preco}
-          </BotaoAdicionar>
-        </Conteudo>
-      </Modal>
-    </FundoEscuro>
+    <Modal>
+      <ModalContent>
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <img src={produto.imagem} alt={produto.titulo} style={{ width: '100px', height: '100px' }} />
+          <div>
+            <ModalTitle>{produto.titulo}</ModalTitle>
+            <ModalDescricao>{produto.descricao}</ModalDescricao>
+            <ModalPreco>Preço: {produto.preco}</ModalPreco>
+            <ModalBotao onClick={aoAdicionarAoCarrinho}>Adicionar ao Carrinho</ModalBotao>
+          </div>
+        </div>
+        <button onClick={onClose}>Fechar</button>
+      </ModalContent>
+    </Modal>
   );
 };
 

@@ -1,3 +1,4 @@
+// src/components/SidebarCarrinho/styles.ts
 import styled from "styled-components";
 
 export const Sidebar = styled.aside`
@@ -8,8 +9,15 @@ export const Sidebar = styled.aside`
   top: 0;
   right: 0;
   z-index: 1100;
-  padding: 20px 20px 20px 20px;
-  overflow-y: none;
+  padding: 20px;
+  overflow-y: auto; /* Corrige a propriedade de overflow */
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    width: 100%; /* Sidebar ocupa a tela inteira em dispositivos menores */
+    height: 100vh;
+    right: 0;
+  }
 `;
 
 export const SidebarFundo = styled.div`
@@ -35,13 +43,19 @@ export const Item = styled.div`
   margin-bottom: 16px;
   position: relative;
   margin-right: 40px;
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    width: 100%; /* Ocupa toda a largura da tela em dispositivos menores */
+    margin-right: 0; /* Remove a margem à direita */
+    height: auto; /* Altura se ajusta automaticamente ao conteúdo */
+  }
 `;
 
 export const ImagemProduto = styled.img`
   width: 80px;
   height: 80px;
   object-fit: cover;
-  border-radius: 8px;
 `;
 
 export const Info = styled.div`
@@ -110,12 +124,16 @@ export const BotaoContinuar = styled.button`
   letter-spacing: 0%;
   text-align: center;
   border: none;
-  border-radius: 8px;
   margin-top: 20px;
   cursor: pointer;
 
   &:hover {
     background-color: #e66767;
     color: #fff;
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    width: 100%; /* O botão ocupa a largura total em telas menores */
   }
 `;

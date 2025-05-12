@@ -21,7 +21,8 @@ interface Produto {
   id: number;
   titulo: string;
   preco: string;
-  imagem: string;
+  imagem?: string;
+  capa?: string;
 }
 
 interface SidebarCarrinhoProps {
@@ -29,7 +30,10 @@ interface SidebarCarrinhoProps {
   onFechar: () => void;
 }
 
-const SidebarCarrinho: React.FC<SidebarCarrinhoProps> = ({ aoContinuar, onFechar }) => {
+const SidebarCarrinho: React.FC<SidebarCarrinhoProps> = ({
+  aoContinuar,
+  onFechar,
+}) => {
   const produtosCarrinho = useSelector(
     (state: any) => state.carrinho.itens
   ) as Produto[];
@@ -57,7 +61,11 @@ const SidebarCarrinho: React.FC<SidebarCarrinhoProps> = ({ aoContinuar, onFechar
       <Sidebar onClick={stopPropagation}>
         {produtosCarrinho.map((produto: Produto) => (
           <Item key={produto.id}>
-            <ImagemProduto src={produto.imagem} alt={produto.titulo} />
+            <ImagemProduto
+              src={produto.imagem || produto.capa}
+              alt={produto.titulo}
+            />
+
             <Info>
               <Titulo>{produto.titulo}</Titulo>
               <Preco>R$ {Number(produto.preco).toFixed(2)}</Preco>

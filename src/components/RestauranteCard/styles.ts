@@ -10,8 +10,13 @@ export const Card = styled.div`
   background-color: #fff;
   margin-bottom: 20px; /* Adiciona margem inferior entre os cards */
 
+  /* Responsividade */
   @media (max-width: 768px) {
     width: 100%; /* Ocupa a largura total em telas menores */
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%; /* Garante que o card ocupe toda a largura em telas muito pequenas */
   }
 `;
 
@@ -20,6 +25,15 @@ export const Imagem = styled.img`
   height: auto; /* Altura automática para manter a proporção */
   object-fit: cover;
   max-height: 217px; /* Altura máxima da imagem */
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    max-height: 180px; /* Ajusta a altura da imagem em telas menores */
+  }
+
+  @media (max-width: 480px) {
+    max-height: 160px; /* Altura da imagem para telas muito pequenas */
+  }
 `;
 
 export const TituloNota = styled.div`
@@ -34,6 +48,11 @@ export const Titulo = styled.h2`
   font-weight: 700;
   font-size: 18px;
   color: #e66767;
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    font-size: 16px; /* Reduz o tamanho da fonte em telas menores */
+  }
 `;
 
 export const Nota = styled.span`
@@ -44,6 +63,11 @@ export const Nota = styled.span`
   display: flex;
   align-items: center;
   gap: 4px;
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    font-size: 16px; /* Reduz o tamanho da fonte em telas menores */
+  }
 `;
 
 export const Descricao = styled.p`
@@ -54,6 +78,11 @@ export const Descricao = styled.p`
   color: #e66767;
   padding: 0 16px;
   margin-bottom: auto; /* Empurra o botão para baixo */
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
+  }
 `;
 
 export const Botao = styled.button`
@@ -72,6 +101,15 @@ export const Botao = styled.button`
   cursor: pointer;
   text-align: center;
   padding: 0 16px; /* Adiciona padding horizontal para mais espaço interno */
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    padding: 0 12px; /* Ajusta o padding do botão em telas menores */
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 10px; /* Ajusta ainda mais o padding em telas muito pequenas */
+  }
 `;
 
 export const Estrela = styled.img`
@@ -97,4 +135,17 @@ export const Categoria = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    font-size: 10px; /* Reduz o tamanho da fonte em telas menores */
+    width: 55px; /* Reduz a largura do botão em telas menores */
+    height: 24px; /* Ajusta a altura do botão */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 9px; /* Tamanho ainda menor para telas pequenas */
+    width: 50px; /* Ajusta ainda mais a largura */
+    height: 22px; /* Ajusta a altura */
+  }
 `;

@@ -1,9 +1,9 @@
 export interface Restaurante {
-  capa: string;
   id: string;
-  nome: string;
-  urlImagem: string; 
-  nota: number;
+  titulo: string;
+  capa: string; // Alterado de imagem para capa
+  avaliacao: number;
   descricao: string;
-  categoria: string;
+  tipo: string;
+  // Adicione outras propriedades que seus restaurantes possuem
 }

@@ -1,24 +1,27 @@
-import React from "react";
+// CardPerfil.tsx
+import React from 'react'
 import {
   Card,
   CardImagem,
   CardTitulo,
   CardDescricao,
-  CardBotao,
-  BotaoComprar,
-  Categoria,
-} from "./styles";
-import { Produto } from "../../models/Produto";
+  CardBotao
+} from './styles'
 
 type Props = {
-  id: number;
-  titulo: string;
-  descricao: string;
-  imagem: string;
-  preco: string;
-  aoAdicionarAoCarrinho: (produto: Produto) => void;
-  aoComprar: (id: string) => void;
-};
+  id: number
+  titulo: string
+  descricao: string
+  imagem: string
+  preco: string
+  aoAdicionarAoCarrinho: (produto: {
+    id: number
+    titulo: string
+    descricao: string
+    imagem: string
+    preco: string
+  }) => void
+}
 
 const CardPerfil = ({
   id,
@@ -26,32 +29,24 @@ const CardPerfil = ({
   descricao,
   imagem,
   preco,
-  aoAdicionarAoCarrinho,
-  aoComprar,
-}: Props) => { 
+  aoAdicionarAoCarrinho
+}: Props) => {
+  const handleClick = () => {
+    aoAdicionarAoCarrinho({ id, titulo, descricao, imagem, preco })
+  }
+
   return (
     <Card>
-      <div style={{ position: "relative" }}>
-        {" "}
-        {/* Container para a imagem e a categoria */}
+      <div style={{ position: 'relative' }}>
         <CardImagem src={imagem} alt={titulo} />
       </div>
       <CardTitulo>{titulo}</CardTitulo>
       <CardDescricao>{descricao}</CardDescricao>
-      <div style={{ display: "flex", gap: "10px" }}>
-        <CardBotao
-          onClick={() =>
-            aoAdicionarAoCarrinho({ id, titulo, descricao, preco, imagem })
-          }
-        >
-          Adicionar ao carrinho
-        </CardBotao>
-        <BotaoComprar onClick={() => aoComprar(id.toString())}>
-          Comprar
-        </BotaoComprar>
+      <div style={{ display: 'flex', gap: '10px' }}>
+        <CardBotao onClick={handleClick}>Adicionar ao carrinho</CardBotao>
       </div>
     </Card>
-  );
-};
+  )
+}
 
-export default CardPerfil;
+export default CardPerfil
