@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import CardPerfil from "../../components/CardPerfil";
 import PerfilComModal from "../../components/PerfilComModal";
 import SidebarCarrinho from "../../components/SidebarCarrinho";
-import { Container, Overlay } from "./styles";
+import { Container, Overlay, ProdutoContainer } from "./styles";
 import PerfilHeader from "../../components/PerfilHeader";
 import Footer from "../../components/Footer";
 import Apresentacao from "../../components/Apresentacao";
-import imagemPerfil from "../../assets/imagemPerfil.png";
 import { useDispatch } from "react-redux";
 import { adicionarAoCarrinho as adicionarAoCarrinhoAction } from "../../store/carrinhoSlice";
 import RestauranteModal from "../../components/RestauranteModal";
@@ -20,75 +19,12 @@ type Produto = {
   descricao: string;
   preco: string;
   imagem: string;
-  capa: string; // Adiciona a propriedade 'capa'
-  nome: string; // Adiciona a propriedade 'nome'
+  foto: string;
+  nome: string;
 };
 
-const produtos: Produto[] = [
-  {
-    id: 1,
-    titulo: "Pizza Marguerita ",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-    preco: "39.90",
-    capa: "",
-    nome: "",
-  },
-  {
-    id: 1,
-    titulo: "Pizza Marguerita ",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-    preco: "39.90",
-    capa: "",
-    nome: "",
-  },
-  {
-    id: 1,
-    titulo: "Pizza Marguerita ",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-    preco: "39.90",
-    capa: "",
-    nome: "",
-  },
-  {
-    id: 1,
-    titulo: "Pizza Marguerita ",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-    preco: "39.90",
-    capa: "",
-    nome: "",
-  },
-  {
-    id: 1,
-    titulo: "Pizza Marguerita ",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-    preco: "39.90",
-    capa: "",
-    nome: "",
-  },
-  {
-    id: 1,
-    titulo: "Pizza Marguerita ",
-    descricao:
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-    imagem: imagemPerfil,
-    preco: "39.90",
-    capa: "",
-    nome: "",
-  },
-  // Adicione outros produtos aqui
-];
-
 const Perfil = () => {
+  const [produtos, setProdutos] = useState<Produto[]>([]);
   const [loading, setLoading] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState<Produto | null>(
     null
@@ -105,13 +41,31 @@ const Perfil = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const fetchProdutos = async () => {
+      try {
+        const response = await fetch(
+          "https://fake-api-tau.vercel.app/api/efood/restaurantes/1"
+        );
+        const data = await response.json();
+        if (data.cardapio) {
+          setProdutos(data.cardapio);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+      }
+    };
+
+    fetchProdutos();
+  }, []);
+
+  useEffect(() => {
     if (itensCarrinho.length === 0) {
       setCarrinhoAberto(false);
     }
   }, [itensCarrinho]);
 
   const adicionarAoCarrinhoRedux = (produto: Produto) => {
-    if (!produto) return; // Verifica se o produto está definido
+    if (!produto) return;
     dispatch(adicionarAoCarrinhoAction(produto));
     setCarrinhoAberto(true);
   };
@@ -133,34 +87,21 @@ const Perfil = () => {
 
   const fecharConfirmacao = () => {
     setMostrarConfirmacao(false);
-    // Lógica para resetar o estado do pedido/carrinho, se necessário
   };
 
-  const handleAdicionarAoCarrinho = async (restauranteId: number) => {
+  const handleAdicionarAoCarrinhoProduto = async (produtoId: number) => {
     try {
-      setLoading(true); // Inicia o carregamento
-
-      // Faz a requisição para obter os detalhes do restaurante
-      const response = await fetch(
-        `https://fake-api-tau.vercel.app/api/efood/restaurantes/${restauranteId}`
-      );
-
+      setLoading(true);
+      const response = await fetch(`url-do-produto/${produtoId}`);
       if (!response.ok) {
-        throw new Error(`Erro ao buscar restaurante: ${response.status}`);
+        throw new Error(`Erro ao buscar produto: ${response.status}`);
       }
-
       const data = await response.json();
-
-      // Atualiza o estado com o restaurante selecionado
-      setRestauranteSelecionado(data);
-
-      // Abre o modal com os detalhes do restaurante
-      setModalRestauranteAberto(true);
     } catch (error) {
-      console.error("Erro ao adicionar ao carrinho:", error);
-      alert("Ocorreu um erro ao buscar o restaurante. Tente novamente.");
+      console.error("Erro ao buscar produto:", error);
+      alert("Erro ao buscar produto.");
     } finally {
-      setLoading(false); // Finaliza o carregamento
+      setLoading(false);
     }
   };
 
@@ -183,54 +124,62 @@ const Perfil = () => {
         !mostrarConfirmacao && <Overlay onClick={fecharCarrinho} />}
       {mostrarConfirmacao && <Overlay />}
       <Container carrinhoAberto={carrinhoAberto}>
-        {produtos.map((produto) => (
-          <CardPerfil
-            key={produto.id}
-            id={produto.id}
-            titulo={produto.titulo}
-            descricao={produto.descricao}
-            imagem={produto.imagem}
-            preco={produto.preco}
-            aoAdicionarAoCarrinho={() => handleAdicionarAoCarrinho(produto.id)} // Passa o ID para a função
-          />
-        ))}
+        <ProdutoContainer>
+          {produtos.slice(0, 6).map((produto) => {
+            return (
+              <CardPerfil
+                key={produto.id}
+                id={produto.id}
+                titulo={produto.nome}
+                descricao={produto.descricao}
+                imagem={produto.foto}
+                preco={produto.preco}
+                aoAdicionarAoCarrinho={() => {
+                  setProdutoSelecionado(produto);
+                  setModalAberto(true);
+                }}
+              />
+            );
+          })}
+        </ProdutoContainer>
 
         {modalAberto && produtoSelecionado && (
-          <PerfilComModal
-            produto={produtoSelecionado}
+          <RestauranteModal
+            restaurante={{
+              id: produtoSelecionado.id,
+              titulo: produtoSelecionado.nome,
+              descricao: produtoSelecionado.descricao,
+              capa: produtoSelecionado.foto,
+              preco: Number(produtoSelecionado.preco),
+              avaliacao: 0,
+              tipo: "",
+            }}
             onClose={() => {
               setModalAberto(false);
-              setProdutoSelecionado(null); // Limpa o produto selecionado ao fechar o modal
+              setProdutoSelecionado(null);
             }}
-            aoAdicionarAoCarrinho={() =>
+            onAddToCart={() =>
               adicionarAoCarrinhoRedux(produtoSelecionado)
             }
-            loading={loading}
           />
         )}
       </Container>
+
       {modalRestauranteAberto && restauranteSelecionado && (
         <RestauranteModal
           restaurante={restauranteSelecionado}
-          onClose={() => {
-            setModalRestauranteAberto(false);
-            setRestauranteSelecionado(null);
-          }}
+          onClose={fecharModalRestaurante}
           onAddToCart={() => {
-            // 1) Aqui: despacha para o Redux o item com 'capa' mapeada para 'imagem'
             adicionarAoCarrinhoRedux({
               ...restauranteSelecionado,
               imagem: restauranteSelecionado.capa,
             });
-
-            // 2) Fecha o modal de restaurante
             setModalRestauranteAberto(false);
-
-            // 3) Abre a sidebar
             setCarrinhoAberto(true);
           }}
         />
       )}
+
       {carrinhoAberto && !mostrarEntrega && !mostrarPagamento && (
         <SidebarCarrinho aoContinuar={abrirEntrega} onFechar={fecharCarrinho} />
       )}

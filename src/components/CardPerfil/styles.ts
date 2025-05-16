@@ -1,26 +1,61 @@
 import styled from 'styled-components'
 
 export const Card = styled.div`
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  height: 338px; /* altura fixa */
   background-color: #E66767;
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  margin: 0px;
+  border: 1px solid #e66767;
+  padding: 16px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 12px;
-  position: relative; /* Necessário para posicionar a categoria */
-`
+  justify-content: flex-start; /* ajusta layout */
+  overflow: hidden;
+`;
 
 export const CardImagem = styled.img`
   width: 100%;
-  height: 160px;
+  height: 167px;
   object-fit: cover;
-  border-radius: 4px;
-`
+  flex-shrink: 0; /* evita que encolha */
+`;
+
+export const CardDescricao = styled.p`
+  font-size: 0.875rem; /* 14px */
+  color: #FFEBD9;
+  margin: 10px 0;
+  line-height: 1.4;
+  flex-grow: 1;       /* ocupa o espaço disponível */
+  overflow-y: auto;   /* adiciona scroll vertical se texto for maior */
+  white-space: normal;
+
+  /* Esconde a barra de rolagem vertical */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+`;
+
+export const CardBotao = styled.button`
+  width: 100%;
+  padding: 8px; /* maior para melhor clique */
+  background-color: #FFEBD9;
+  color: #E66767;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: #d14d4d;
+    color: #FFEBD9;
+  }
+`;
+
 
 export const CardTitulo = styled.h3`
   font-size: 1.125rem; /* 18px */
@@ -28,33 +63,6 @@ export const CardTitulo = styled.h3`
   color: #FFEBD9;
   margin: 0;
   padding-bottom: 8px;
-`
-
-export const CardDescricao = styled.p`
-  font-size: 0.875rem; /* 14px */
-  color: #FFEBD9;
-  margin: 10px 0;
-  line-height: 1.4;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`
-
-export const CardBotao = styled.button`
-  width: 100%;
-  padding: 10px;
-  background-color: #FFEBD9;
-  color: #E66767;
-  border: none;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: background-color 0.3s, color 0.3s;
-
-  &:hover {
-    background-color: #d14d4d;
-    color: #FFEBD9;
-  }
 `
 
 export const Categoria = styled.span`

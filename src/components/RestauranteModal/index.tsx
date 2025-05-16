@@ -20,18 +20,24 @@ interface Props {
     descricao: string;
     tipo: string;
     capa: string;
+    preco: number;
   };
   onClose: () => void;
-  onAddToCart: () => void;    // <-- nova prop
+  onAddToCart: (produto: {
+    id: number;
+    titulo: string;
+    imagem: string;
+    preco: number;
+  }) => void;
 }
 
 const RestauranteModal: React.FC<Props> = ({
   restaurante,
   onClose,
-  onAddToCart,                // <-- recebe o callback
+  onAddToCart,
 }) => {
   if (!restaurante) return null;
-
+console.log('Modal renderizado:', restaurante); 
   return (
     <ModalOverlay onClick={onClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
@@ -44,8 +50,13 @@ const RestauranteModal: React.FC<Props> = ({
             <Description>{restaurante.descricao}</Description>
             <AddButton
               onClick={() => {
-                onAddToCart();  // dispara o callback do pai
-                onClose();      // fecha o modal
+                onAddToCart({
+                  id: restaurante.id,
+                  titulo: restaurante.titulo,
+                  imagem: restaurante.capa,
+                  preco: restaurante.preco, 
+                });
+                onClose();
               }}
             >
               <ButtonText>Adicionar ao carrinho</ButtonText>

@@ -10,13 +10,13 @@ export const Sidebar = styled.aside`
   right: 0;
   z-index: 1100;
   padding: 20px;
-  overflow-y: auto; /* Corrige a propriedade de overflow */
+  overflow-y: none; /* Corrige a propriedade de overflow */
   
   /* Responsividade */
   @media (max-width: 768px) {
     width: 100%; /* Sidebar ocupa a tela inteira em dispositivos menores */
     height: 100vh;
-    right: 0;
+    right: 10px;
   }
 `;
 
@@ -95,21 +95,21 @@ export const ValorTotalContainer = styled.div`
   font-family: Roboto;
   font-weight: 700;
   font-size: 14px;
-  color: #ffe_bd9;
+  color: #FFEBD9;
 `;
 
 export const ValorTotalTexto = styled.p`
   width: 65px;
   height: 16px;
   text-align: left;
-  color: #ffe_bd9;
+  color: #FFEBD9;
 `;
 
 export const ValorTotalValor = styled.p`
   width: 65px;
   height: 16px;
   text-align: right;
-  color: #ffe_bd9;
+  color: #FFEBD9;
 `;
 
 export const BotaoContinuar = styled.button`

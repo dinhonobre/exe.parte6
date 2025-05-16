@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const Card = styled.div`
+ width: 320px;
+  height: 338px;
   width: calc(50% - 20px); /* Ocupa metade da largura com espaçamento */
   max-width: 500px; /* Largura máxima */
   height: auto; /* Altura automática para se ajustar ao conteúdo */

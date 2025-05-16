@@ -36,7 +36,17 @@ export const ModalContainer = styled.div`
     left: 5%;
     top: 30%;
   }
+
+  /* Mobile view adjustments */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    top: 20%;
+    padding: 20px;
+  }
 `;
+
 
 export const CloseButton = styled.button`
   position: absolute;

@@ -14,8 +14,14 @@ const Listagem = () => {
       setLoading(true);
       setError(null);
       try {
-        const data = await getRestaurantes();
-        setRestaurantes(data);
+        const data: Restaurante[] = await getRestaurantes();
+        
+        const produtosComPreco = data.map((restaurante) => ({
+          ...restaurante,
+          preco: "39.90"
+        }));
+
+        setRestaurantes(produtosComPreco);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -26,29 +32,21 @@ const Listagem = () => {
     carregarRestaurantes();
   }, []);
 
-  if (loading) {
-    return <p>Carregando restaurantes...</p>;
-  }
-
-  if (error) {
-    return <p>Erro ao carregar restaurantes: {error}</p>;
-  }
+  if (loading) return <p>Carregando restaurantes...</p>;
+  if (error) return <p>Erro ao carregar restaurantes: {error}</p>;
 
   return (
     <ListagemContainer>
-      {restaurantes.map((restaurante) => {
-        console.log("Dados do restaurante:", restaurante);
-        return (
-          <RestauranteCard
-            key={restaurante.id}
-            imagem={restaurante.capa}
-            titulo={restaurante.titulo}
-            nota={restaurante.avaliacao}
-            descricao={restaurante.descricao}
-            categoria={restaurante.tipo}
-          />
-        );
-      })}
+      {restaurantes.map((restaurante) => (
+        <RestauranteCard
+          key={restaurante.id}
+          imagem={restaurante.capa}
+          titulo={restaurante.titulo}
+          nota={restaurante.avaliacao}
+          descricao={restaurante.descricao}
+          categoria={restaurante.tipo}
+        />
+      ))}
     </ListagemContainer>
   );
 };

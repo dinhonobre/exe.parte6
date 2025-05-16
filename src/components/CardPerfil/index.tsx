@@ -38,7 +38,10 @@ const CardPerfil = ({
   return (
     <Card>
       <div style={{ position: 'relative' }}>
-        <CardImagem src={imagem} alt={titulo} />
+        <CardImagem
+          src={imagem || 'https://via.placeholder.com/300x200?text=Sem+Imagem'} 
+          alt={titulo}
+        />
       </div>
       <CardTitulo>{titulo}</CardTitulo>
       <CardDescricao>{descricao}</CardDescricao>

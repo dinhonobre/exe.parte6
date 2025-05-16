@@ -3,23 +3,75 @@
   --espacamento-padrao: 1rem;
   --largura-maxima-conteudo: 1200px;
   --altura-hero: 320px;
-  --fonte-padrao: 'Roboto', sans-serif; /* Fonte padrão */
+  --fonte-padrao: "Roboto", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita scroll horizontal */
   font-family: var(--fonte-padrao);
-  font-size: var(--tamanho-texto-base);  /* Tamanho base de texto */
+  font-size: var(--tamanho-texto-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Header com largura total */
+header {
+  width: 100%;
+  background-color: #fff; /* Se quiser, mantenha background para o header */
+}
+
+/* Container para centralizar conteúdo */
 .container {
   max-width: var(--largura-maxima-conteudo);
   margin: 0 auto;
   padding: 0 var(--espacamento-padrao);
 }
 
+/* Imagem de apresentação com largura total e altura controlada */
+.full-width-image {
+  width: 100%;
+  max-height: var(--altura-hero);
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Texto com espaçamento */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: var(--espacamento-padrao);
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: var(--espacamento-padrao);
+}
+
+/* Grid de cards dentro do container */
+.container .cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .container .cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* Ajustes para telas grandes */
 @media (min-width: 1200px) {
   :root {
     --tamanho-texto-base: 18px;
@@ -32,13 +84,13 @@ body {
   }
 
   h1 {
-    font-size: 3rem;  /* Ajuste do tamanho do título */
-    margin-bottom: 20px;  /* Espaçamento abaixo do título */
+    font-size: 3rem;
+    margin-bottom: 20px;
   }
 
   p {
-    font-size: 1.25rem;  /* Ajuste do tamanho do parágrafo */
-    margin-bottom: 15px;  /* Espaçamento abaixo do parágrafo */
+    font-size: 1.25rem;
+    margin-bottom: 15px;
   }
 }
 
@@ -48,37 +100,7 @@ body {
   }
 }
 
-h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: var(--espacamento-padrao); /* Espaçamento abaixo do título */
-}
-
-p {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #666;
-  margin-bottom: var(--espacamento-padrao); /* Espaçamento abaixo do parágrafo */
-}
-
-/* Outros ajustes específicos podem ser feitos aqui */
-
-/* Para o layout de grid, com espaçamento menor entre os cards */
-.container .cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colunas de igual largura */
-  gap: 15px; /* Espaçamento entre os cards */
-}
-
-@media (max-width: 768px) {
-  .container .cards {
-    grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
-    gap: 10px; /* Menor espaçamento */
-  }
-}
-
-/* Estilo do Footer */
+/* Estilo do footer */
 footer {
   background-color: #f8f9fa;
   padding: 1rem;
@@ -86,6 +108,6 @@ footer {
 }
 
 footer p {
-  font-size: 0.875rem; /* Fonte menor no rodapé */
+  font-size: 0.875rem;
   color: #333;
 }

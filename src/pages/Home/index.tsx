@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
-import { HeroContainer, HeroText, Logo } from './styles';
+import { HomeContainer, HeroContainer, HeroText, Logo } from './styles';
 import Listagem from '../../components/Listagem';
 import Rodape from '../../components/Footer';
 import fundo from '../../assets/fundo.png';
 
 const Home = () => (
-  <>
+  <HomeContainer>
     <HeroContainer backgroundImage={fundo}>
       <Logo src={logo} alt="Logo" />
       <HeroText>
@@ -16,7 +16,7 @@ const Home = () => (
     </HeroContainer>
     <Listagem />
     <Rodape />
-  </>
+  </HomeContainer>
 );
 
 export default Home;

@@ -5,5 +5,6 @@ export interface Restaurante {
   avaliacao: number;
   descricao: string;
   tipo: string;
+  preco: string;
   // Adicione outras propriedades que seus restaurantes possuem
 }

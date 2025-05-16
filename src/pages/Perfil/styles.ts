@@ -1,5 +1,5 @@
 // src/pages/Perfil/styles.ts
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface Props {
   carrinhoAberto: boolean;
@@ -7,14 +7,15 @@ interface Props {
 
 export const Container = styled.div<Props>`
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Define 3 colunas de igual largura */
-  grid-template-rows: auto auto; /* Define pelo menos 2 linhas automáticas */
-  gap: 20px; /* Espaçamento entre os cards */
-  width: 90%; /* Ocupa 90% da largura da tela para centralizar */
-  max-width: 1200px; /* Largura máxima para evitar que se estenda demais */
-  margin: 50px auto; /* Centraliza horizontalmente com margens superior e inferior */
-  background-color: #f8f9fa;
-  opacity: ${(props) => (props.carrinhoAberto ? 0.5 : 1)}; /* Opacidade ajustável */
+  grid-column: 1 / -1;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  width: 100%;
+  max-width: 100%; /* Limitar largura máxima para centralizar */
+  margin: 0 auto; /* Centraliza horizontalmente */
+  background:#FFF8F2;
+  opacity: ${(props) =>
+    props.carrinhoAberto ? 0.5 : 1}; /* Opacidade ajustável */
   transition: opacity 0.3s ease;
   justify-items: center; /* Centraliza os itens horizontalmente dentro de cada célula da grid */
   align-items: center; /* Centraliza os itens verticalmente dentro de cada célula da grid */
@@ -29,7 +30,10 @@ export const Container = styled.div<Props>`
 
   /* Para telas entre 768px e 1024px (tablets) */
   @media (min-width: 769px) and (max-width: 1024px) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adaptável para tablets */
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(300px, 1fr)
+    ); /* Adaptável para tablets */
     width: 95%;
     margin: 30px auto;
   }
@@ -48,7 +52,7 @@ export const Overlay = styled.div`
 
 export const Header = styled.header`
   width: 100%;
-  max-width: 1366px;
+  max-width: 100%;
   height: auto; /* Altura automática para se adaptar ao conteúdo */
   margin: 0 auto;
   display: flex;
@@ -57,13 +61,12 @@ export const Header = styled.header`
   padding: 15px 20px; /* Padding menor em telas menores */
   background-color: #fff;
   flex-direction: row; /* Garante que os itens fiquem em linha */
+  flex-wrap: wrap;
 
-  /* Responsividade */
   @media (max-width: 768px) {
-    flex-direction: column; /* Empilha os itens em telas menores */
-    align-items: flex-start; /* Alinha à esquerda em telas menores */
-    padding: 10px 15px;
-    height: auto; /* Ajusta a altura automaticamente */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 `;
 
@@ -85,10 +88,10 @@ export const TextoRestaurante = styled.h1`
   color: #e66767;
   margin-top: 10px;
 
-  /* Responsividade */
   @media (max-width: 768px) {
     font-size: 16px;
-    text-align: left; /* Alinha à esquerda em telas pequenas */
+    text-align: left;
+    width: 100%;
   }
 `;
 
@@ -108,45 +111,47 @@ export const CarrinhoTexto = styled.h2`
 `;
 
 export const ImagemApresentacao = styled.img`
-  width: 100% !important;
-  max-width: 1024px !important;
-  height: auto !important;
-  display: block !important;
-  margin: 20px auto !important;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
 `;
 
 export const ProdutoContainer = styled.div`
-  max-width: 1024px;
-  margin: 20px auto; /* Margem vertical menor */
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px; /* Espaçamento menor */
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanhos iguais */
+  grid-template-rows: repeat(2, auto); /* 2 linhas automáticas */
+  gap: 30px 40px;
+  margin: 0 auto;
+  background: #FFF8F2;
+  padding: 48px 8px;
+  max-width: 1024px; /* limite de largura */
+  width: 100%;
+  justify-items: center; /* centraliza cada card dentro da célula */
 
-  /* Responsividade */
   @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* 1 coluna em telas menores */
+    grid-template-columns: 1fr; /* 1 coluna no mobile */
+    grid-template-rows: auto;
     width: 90%;
-  }
-
-  /* Para tablets */
-  @media (min-width: 769px) and (max-width: 1024px) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    width: 95%;
   }
 `;
 
+
 export const Card = styled.div`
+  width: 320px;
+  height: 338px;
   background-color: #fff;
   border: 1px solid #e66767;
   border-radius: 8px;
-  padding: 10px;
+  padding: 16px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%; /* Certificando-se de que o card ocupe a largura total do container */
-  max-width: 300px; /* Limite de largura para que os cards não estiquem muito */
-  height: auto;
+  justify-content: space-between;
+  overflow: hidden;
 `;
+
 
 export const CardImagem = styled.img`
   width: 100%;

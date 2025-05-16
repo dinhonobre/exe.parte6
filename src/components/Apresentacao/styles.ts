@@ -6,7 +6,13 @@ export const Container = styled.div`
   display: block;
   position: relative;
   width: 100%;
-  max-width: 100%; /* garante que o container não ultrapasse o viewport */
+  max-width: 100%;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 `
 
 export const Tipo = styled.h4`

@@ -22,7 +22,7 @@ interface Produto {
   titulo: string;
   preco: string;
   imagem?: string;
-  capa?: string;
+  capa: string;
 }
 
 interface SidebarCarrinhoProps {
@@ -55,16 +55,15 @@ const SidebarCarrinho: React.FC<SidebarCarrinhoProps> = ({
   const stopPropagation = (event: React.MouseEvent) => {
     event.stopPropagation(); // Impede que o clique dentro da sidebar feche o fundo
   };
+  console.log('Produtos no carrinho:', produtosCarrinho);
+
 
   return (
     <SidebarFundo onClick={onFechar}>
       <Sidebar onClick={stopPropagation}>
         {produtosCarrinho.map((produto: Produto) => (
           <Item key={produto.id}>
-            <ImagemProduto
-              src={produto.imagem || produto.capa}
-              alt={produto.titulo}
-            />
+            <ImagemProduto src={produto.imagem} alt={produto.titulo} />
 
             <Info>
               <Titulo>{produto.titulo}</Titulo>
