@@ -9,6 +9,7 @@ export const HomeContainer = styled.div`
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
+  background:#FFF8F2;
 
   @media (max-width: 768px) {
     padding: 0 px;

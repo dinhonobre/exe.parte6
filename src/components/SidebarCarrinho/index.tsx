@@ -19,10 +19,9 @@ import IconeLixeira from "../../assets/lixeira.icon.png";
 
 interface Produto {
   id: number;
-  titulo: string;
+  nome: string;
   preco: string;
-  imagem?: string;
-  capa: string;
+  foto?: string;
 }
 
 interface SidebarCarrinhoProps {
@@ -63,10 +62,10 @@ const SidebarCarrinho: React.FC<SidebarCarrinhoProps> = ({
       <Sidebar onClick={stopPropagation}>
         {produtosCarrinho.map((produto: Produto) => (
           <Item key={produto.id}>
-            <ImagemProduto src={produto.imagem} alt={produto.titulo} />
+            <ImagemProduto src={produto.foto} alt={produto.nome} />
 
             <Info>
-              <Titulo>{produto.titulo}</Titulo>
+              <Titulo>{produto.nome}</Titulo>
               <Preco>R$ {Number(produto.preco).toFixed(2)}</Preco>
             </Info>
             <Lixeira

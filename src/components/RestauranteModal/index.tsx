@@ -26,7 +26,7 @@ interface Props {
   onAddToCart: (produto: {
     id: number;
     titulo: string;
-    imagem: string;
+    foto: string;
     preco: number;
   }) => void;
 }
@@ -53,7 +53,7 @@ console.log('Modal renderizado:', restaurante);
                 onAddToCart({
                   id: restaurante.id,
                   titulo: restaurante.titulo,
-                  imagem: restaurante.capa,
+                  foto: restaurante.capa,
                   preco: restaurante.preco, 
                 });
                 onClose();

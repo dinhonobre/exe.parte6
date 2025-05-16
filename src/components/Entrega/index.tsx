@@ -1,5 +1,5 @@
 import React from "react";
-import { BotaoConfirmar, BotaoVoltar, Campo, CampoMenor, Form, LinhaDupla, Overlay, SidebarEntrega, Titulo } from "./styles";
+import { Label, BotaoConfirmar, BotaoVoltar, Campo, CampoMenor, Form, LinhaDupla, Overlay, SidebarEntrega, Titulo } from "./styles";
 
 type Props = {
   onVoltar: () => void;
@@ -12,14 +12,29 @@ const Entrega: React.FC<Props> = ({ onVoltar, onContinuarPagamento }) => {
       <SidebarEntrega>
         <Titulo>Entrega</Titulo>
         <Form>
-          <Campo placeholder="Nome" />
-          <Campo placeholder="Endereço" />
-          <Campo placeholder="Cidade" />
-          <LinhaDupla>
-            <CampoMenor placeholder="CEP" />
-            <CampoMenor placeholder="Número" />
-          </LinhaDupla>
-          <Campo placeholder="Complemento" />
+          <Label htmlFor="nome">Nome</Label>
+<Campo id="nome" />
+
+<Label htmlFor="endereco">Endereço</Label>
+<Campo id="endereco" />
+
+<Label htmlFor="cidade">Cidade</Label>
+<Campo id="cidade" />
+
+<LinhaDupla>
+  <div>
+    <Label htmlFor="cep">CEP</Label>
+    <CampoMenor id="cep" />
+  </div>
+  <div>
+    <Label htmlFor="numero">Número</Label>
+    <CampoMenor id="numero" />
+  </div>
+</LinhaDupla>
+
+<Label htmlFor="complemento">Complemento</Label>
+<Campo id="complemento" />
+
           <BotaoConfirmar onClick={onContinuarPagamento}>Continuar com o pagamento</BotaoConfirmar>
           <BotaoVoltar onClick={onVoltar}>Voltar para carrinho</BotaoVoltar>
         </Form>

@@ -2,7 +2,8 @@
 import styled from "styled-components";
 
 export const Sidebar = styled.aside`
-  width: 360px;
+  width: 100%;
+  max-width: 400px;
   height: 100vh;
   background-color: #e66767;
   position: fixed;
@@ -33,7 +34,7 @@ export const SidebarFundo = styled.div`
 `;
 
 export const Item = styled.div`
-  width: 344px;
+  width: 100%;
   height: 100px;
   background: #fff;
   display: flex;
@@ -43,6 +44,8 @@ export const Item = styled.div`
   margin-bottom: 16px;
   position: relative;
   margin-right: 40px;
+  background: #FFEBD9;
+
   
   /* Responsividade */
   @media (max-width: 768px) {
@@ -113,7 +116,7 @@ export const ValorTotalValor = styled.p`
 `;
 
 export const BotaoContinuar = styled.button`
-  width: 344px;
+  width: 100%;
   height: 24px;
   background-color: #ffebd9;
   color: #e66767;

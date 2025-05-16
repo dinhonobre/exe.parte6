@@ -15,7 +15,7 @@ export const Overlay = styled.div`
 export const SidebarEntrega = styled.div`
   background-color: #E66767;
   width: 100%;
-  max-width: 360px;
+  max-width: 400px;
   height: 100%;
   padding: 32px;
   box-sizing: border-box;
@@ -64,6 +64,17 @@ export const CampoMenor = styled(Campo)`
   flex: 1;
 `
 
+export const Label = styled.label`
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFEBD9;
+  display: block;       /* Para ficar em linha separada acima do campo */
+  margin-bottom: 4px;   /* Espaço entre o label e o input */
+`;
+
 export const BotaoConfirmar = styled.button`
   margin-top: 24px;
   padding: 12px;
@@ -82,6 +93,7 @@ export const BotaoConfirmar = styled.button`
 `
 
 export const BotaoVoltar = styled(BotaoConfirmar)`
+  margin-top: 1px;
   background-color: #FFEBD9;
   color:  #E66767;
   border: none;

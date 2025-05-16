@@ -14,7 +14,7 @@ export const Overlay = styled.div`
 
 export const SidebarEntrega = styled.div`
   background-color: #E66767;
-  width: 360px;
+  width: 400px;
   height: 100%;
   padding: 32px;
   box-sizing: border-box;
@@ -27,8 +27,16 @@ export const Titulo = styled.h2`
   font-weight: 700;
   font-size: 16px;
   color: #FFEBD9;
+  margin: 0;
+`
+
+export const TopoPagamento = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 24px;
 `
+
 
 export const Form = styled.div`
   display: flex;
@@ -36,7 +44,19 @@ export const Form = styled.div`
   gap: 16px;
 `
 
+export const Label = styled.label`
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFEBD9;
+  display: block;       /* Para ficar em linha separada acima do campo */
+  margin-bottom: 4px;   /* Espaço entre o label e o input */
+`;
+
 export const Campo = styled.input`
+width: 100%;
   height: 32px;
   border: none;
   padding: 8px;
@@ -52,6 +72,16 @@ export const CampoMenor = styled(Campo)`
   flex: 1;
   width: 100%;
 `
+
+export const Valor = styled.span`
+  font-family: Roboto;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFEBD9;
+`
+
 
 export const BotaoConfirmar = styled.button`
   margin-top: 24px;
@@ -71,7 +101,7 @@ export const BotaoConfirmar = styled.button`
 `
 
 export const BotaoVoltar = styled.button`
- margin-top: 24px;
+  margin-top: 1px;
   padding: 12px;
   background-color: #FFEBD9;
   color: #E66767;
