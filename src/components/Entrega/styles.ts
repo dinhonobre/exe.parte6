@@ -39,7 +39,7 @@ export const Titulo = styled.h2`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px; /* Espaço entre os grupos label + campo */
 `
 
 export const Campo = styled.input`
@@ -49,6 +49,7 @@ export const Campo = styled.input`
   font-size: 1rem;
   box-sizing: border-box;
   width: 100%;
+  margin-bottom: 2px;
 `
 
 export const LinhaDupla = styled.div`
@@ -72,7 +73,7 @@ export const Label = styled.label`
   letter-spacing: 0%;
   color: #FFEBD9;
   display: block;       /* Para ficar em linha separada acima do campo */
-  margin-bottom: 4px;   /* Espaço entre o label e o input */
+  margin-bottom: 2px;   /* Espaço entre o label e o input */
 `;
 
 export const BotaoConfirmar = styled.button`

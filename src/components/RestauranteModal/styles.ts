@@ -72,6 +72,11 @@ export const AddButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:hover {
+    background-color: #d14d4d;
+    color: #FFEBD9;
+  }
 `;
 
 export const ButtonText = styled.span`

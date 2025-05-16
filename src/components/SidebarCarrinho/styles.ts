@@ -131,8 +131,8 @@ export const BotaoContinuar = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: #e66767;
-    color: #fff;
+    background-color: #d14d4d;
+    color: #FFEBD9;
   }
 
   /* Responsividade */

@@ -32,7 +32,7 @@ const Entrega: React.FC<Props> = ({ onVoltar, onContinuarPagamento }) => {
   </div>
 </LinhaDupla>
 
-<Label htmlFor="complemento">Complemento</Label>
+<Label htmlFor="complemento">Complemento(Opcional)</Label>
 <Campo id="complemento" />
 
           <BotaoConfirmar onClick={onContinuarPagamento}>Continuar com o pagamento</BotaoConfirmar>
