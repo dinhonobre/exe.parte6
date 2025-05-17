@@ -12,7 +12,7 @@ const Entrega: React.FC<Props> = ({ onVoltar, onContinuarPagamento }) => {
       <SidebarEntrega>
         <Titulo>Entrega</Titulo>
         <Form>
-          <Label htmlFor="nome">Nome</Label>
+          <Label htmlFor="nome">Quem irá receber</Label>
 <Campo id="nome" />
 
 <Label htmlFor="endereco">Endereço</Label>

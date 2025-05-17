@@ -56,11 +56,12 @@ export const Label = styled.label`
 `;
 
 export const Campo = styled.input`
-width: 100%;
+  width: 100%;
   height: 32px;
   border: none;
   padding: 8px;
   font-size: 14px;
+  margin-bottom: 16px;
 `
 
 export const LinhaDupla = styled.div`
@@ -71,6 +72,7 @@ export const LinhaDupla = styled.div`
 export const CampoMenor = styled(Campo)`
   flex: 1;
   width: 100%;
+  margin-bottom: 4px;
 `
 
 export const Valor = styled.span`

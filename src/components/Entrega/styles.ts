@@ -63,6 +63,7 @@ export const LinhaDupla = styled.div`
 
 export const CampoMenor = styled(Campo)`
   flex: 1;
+  margin-bottom: 16px;
 `
 
 export const Label = styled.label`

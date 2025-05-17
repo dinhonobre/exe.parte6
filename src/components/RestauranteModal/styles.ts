@@ -50,22 +50,24 @@ export const ModalContainer = styled.div`
 
 export const CloseButton = styled.button`
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 16px;
+  right: 16px;
   width: 16px;
   height: 16px;
   background: transparent;
   border: none;
   color: #fff;
-  font-size: 16px;
+  font-size: 24px;
   line-height: 16px;
   cursor: pointer;
+  font-weight: 100; 
+
 `;
 
 export const AddButton = styled.button`
   width: 218px;
   height: 24px;
-  background: #FFEBD9;
+  color: #E66767;
   border: none;
   margin-top: auto; 
   cursor: pointer;
@@ -75,7 +77,6 @@ export const AddButton = styled.button`
 
   &:hover {
     background-color: #d14d4d;
-    color: #FFEBD9;
   }
 `;
 
@@ -87,6 +88,11 @@ export const ButtonText = styled.span`
   letter-spacing: 0;
   text-align: center;
   color: #E66767;
+
+  &:hover {
+    background-color: #d14d4d;
+    color: #FFEBD9;
+  }
 `;
 
 export const Content = styled.div`
@@ -116,8 +122,9 @@ export const Title = styled.h2`
   letter-spacing: 0;
   text-align: center;
   color: #FFFFFF;
-  margin: 0 0 8px;
   text-align: left;
+  margin-bottom: 24px;
+  margin-top: 0;
 `;
 
 export const Description = styled.p`
