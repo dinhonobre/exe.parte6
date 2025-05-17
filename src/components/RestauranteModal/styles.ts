@@ -66,8 +66,9 @@ export const CloseButton = styled.button`
 
 export const AddButton = styled.button`
   width: 218px;
-  height: 24px;
-  color: #E66767;
+  height: 40px; /* aumentar um pouco a altura para ficar melhor */
+  background-color: #fff; /* fundo branco para contraste */
+  color: #E66767; /* texto vermelho */
   border: none;
   margin-top: auto; 
   cursor: pointer;
@@ -77,6 +78,7 @@ export const AddButton = styled.button`
 
   &:hover {
     background-color: #d14d4d;
+    color: #fff;
   }
 `;
 
@@ -87,12 +89,7 @@ export const ButtonText = styled.span`
   line-height: 100%;
   letter-spacing: 0;
   text-align: center;
-  color: #E66767;
-
-  &:hover {
-    background-color: #d14d4d;
-    color: #FFEBD9;
-  }
+  color: inherit; /* herda a cor do AddButton */
 `;
 
 export const Content = styled.div`

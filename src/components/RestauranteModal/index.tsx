@@ -20,7 +20,7 @@ interface Props {
     descricao: string;
     tipo: string;
     capa: string;
-    preco: number;
+    preco: number | string;
   };
   onClose: () => void;
   onAddToCart: (produto: {
@@ -37,7 +37,7 @@ const RestauranteModal: React.FC<Props> = ({
   onAddToCart,
 }) => {
   if (!restaurante) return null;
-console.log('Modal renderizado:', restaurante); 
+  console.log("Modal renderizado:", restaurante);
   return (
     <ModalOverlay onClick={onClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
@@ -54,12 +54,15 @@ console.log('Modal renderizado:', restaurante);
                   id: restaurante.id,
                   titulo: restaurante.titulo,
                   foto: restaurante.capa,
-                  preco: restaurante.preco, 
+                  preco: Number(restaurante.preco),
                 });
                 onClose();
               }}
             >
-              <ButtonText>Adicionar ao carrinho</ButtonText>
+              <ButtonText>
+                Adicionar ao carrinho - R${" "}
+                {String(restaurante.preco).replace(".", ",")}
+              </ButtonText>
             </AddButton>
           </Info>
         </Content>
