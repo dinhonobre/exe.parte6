@@ -38,6 +38,7 @@ const Perfil = () => {
   const [restauranteSelecionado, setRestauranteSelecionado] =
     useState<any>(null);
   const [modalRestauranteAberto, setModalRestauranteAberto] = useState(false);
+  const [orderId, setOrderId] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -80,10 +81,12 @@ const Perfil = () => {
     setMostrarPagamento(true);
   };
 
-  const fecharPagamento = () => {
-    setMostrarPagamento(false);
-    setMostrarConfirmacao(true);
-  };
+  const fecharPagamento = (orderIdParam: string) => {
+  setMostrarPagamento(false);
+  setMostrarConfirmacao(true);
+  setOrderId(orderIdParam);
+};
+
 
   const fecharConfirmacao = () => {
     setMostrarConfirmacao(false);
@@ -158,9 +161,7 @@ const Perfil = () => {
               setModalAberto(false);
               setProdutoSelecionado(null);
             }}
-            onAddToCart={() =>
-              adicionarAoCarrinhoRedux(produtoSelecionado)
-            }
+            onAddToCart={() => adicionarAoCarrinhoRedux(produtoSelecionado)}
           />
         )}
       </Container>
@@ -191,17 +192,26 @@ const Perfil = () => {
       )}
       {mostrarPagamento && (
         <Pagamento
-          onFecharPagamento={fecharPagamento}
-          onConfirmarPagamento={() => setMostrarConfirmacao(true)}
+          onFecharPagamento={() => setMostrarPagamento(false)}
+          onPedidoConfirmado={(id: string) => {
+            setOrderId(id);
+            setMostrarPagamento(false);
+            setMostrarConfirmacao(true);
+          }}
           onVoltarParaEntrega={() => {
             setMostrarPagamento(false);
             setMostrarEntrega(true);
           }}
         />
       )}
+
       {mostrarConfirmacao && (
-        <Confirmacao onFecharConfirmacao={fecharConfirmacao} />
+        <Confirmacao
+          onFecharConfirmacao={fecharConfirmacao}
+          orderId={orderId}
+        />
       )}
+
       <Footer />
     </>
   );

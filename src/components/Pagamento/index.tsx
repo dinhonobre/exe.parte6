@@ -1,22 +1,72 @@
-import React from "react";
-import { TopoPagamento, Valor, BotaoConfirmar, BotaoVoltar, Campo, CampoMenor, Form, LinhaDupla, Overlay, SidebarEntrega, Titulo, Label } from "./styles";
+import React, { useState } from "react"
+import {
+  TopoPagamento, Valor, BotaoConfirmar, BotaoVoltar, Campo, CampoMenor,
+  Form, LinhaDupla, Overlay, SidebarEntrega, Titulo, Label
+} from "./styles"
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
+import axios from 'axios'
+
 type Props = {
-  onFecharPagamento: () => void;
-  onConfirmarPagamento: () => void;
-  onVoltarParaEntrega: () => void;
-};
+  onFecharPagamento: () => void
+  onVoltarParaEntrega: () => void
+  onPedidoConfirmado: (id: string) => void
+
+}
+
+interface RespostaPedido {
+  orderId: string;
+}
 
 const Pagamento: React.FC<Props> = ({
   onFecharPagamento,
-  onConfirmarPagamento,
-  onVoltarParaEntrega
-}) => { const itensCarrinho = useSelector((state: RootState) => state.carrinho.itens)
+  onVoltarParaEntrega,
+  onPedidoConfirmado
+}) => {
+  const itensCarrinho = useSelector((state: RootState) => state.carrinho.itens)
 
-  const total = itensCarrinho.reduce((soma, item) => {
-    return soma + Number(item.preco) // faz cast se o preço estiver como string
-  }, 0)
+  const total = itensCarrinho.reduce((soma, item) => soma + Number(item.preco), 0)
+
+  // Estados para os campos
+  const [nome, setNome] = useState('')
+  const [numero, setNumero] = useState('')
+  const [cvv, setCvv] = useState('')
+  const [mes, setMes] = useState('')
+  const [ano, setAno] = useState('')
+
+  const enviarPedido = async () => {
+  const pedido = {
+    products: itensCarrinho.map((item) => ({
+      id: item.id,
+      price: item.preco,
+    })),
+    payment: {
+      card: {
+        name: nome,
+        number: numero,
+        code: Number(cvv),
+        expires: {
+          month: Number(mes),
+          year: Number(ano),
+        },
+      },
+    },
+  };
+
+  try {
+    const resposta = await axios.post<RespostaPedido>(
+      "https://fake-api-tau.vercel.app/api/efood/checkout",
+      pedido
+    );
+    console.log("Pedido confirmado:", resposta.data);
+    onPedidoConfirmado(resposta.data.orderId); 
+
+  } catch (erro) {
+    console.error("Erro ao enviar pedido:", erro);
+    alert("Erro ao finalizar o pagamento.");
+  }
+};
+
   return (
     <Overlay onClick={onFecharPagamento}>
       <SidebarEntrega onClick={(e) => e.stopPropagation()}>
@@ -26,36 +76,32 @@ const Pagamento: React.FC<Props> = ({
         </TopoPagamento>
 
         <Form>
-          {/* 3. Nome no Cartão */}
           <Label htmlFor="nomeCartao">Nome no Cartão</Label>
-          <Campo id="nomeCartao" placeholder="" />
+          <Campo id="nomeCartao" value={nome} onChange={(e) => setNome(e.target.value)} />
 
-          {/* 4. Número do Cartão e 5. CVV ao lado */}
           <LinhaDupla>
             <div style={{ flex: 2 }}>
               <Label htmlFor="numeroCartao">Número do Cartão</Label>
-              <Campo id="numeroCartao" placeholder="" />
+              <Campo id="numeroCartao" value={numero} onChange={(e) => setNumero(e.target.value)} />
             </div>
             <div style={{ flex: 1, marginLeft: '8px' }}>
               <Label htmlFor="cvv">CVV</Label>
-              <Campo id="cvv" placeholder="" />
+              <Campo id="cvv" value={cvv} onChange={(e) => setCvv(e.target.value)} />
             </div>
           </LinhaDupla>
 
-          {/* 6. Mês e Ano de vencimento lado a lado */}
           <LinhaDupla>
             <div style={{ flex: 1 }}>
               <Label htmlFor="mes">Mês de vencimento</Label>
-              <CampoMenor id="mes" placeholder="" />
+              <CampoMenor id="mes" value={mes} onChange={(e) => setMes(e.target.value)} />
             </div>
             <div style={{ flex: 1, marginLeft: '8px' }}>
               <Label htmlFor="ano">Ano de vencimento</Label>
-              <CampoMenor id="ano" placeholder="" />
+              <CampoMenor id="ano" value={ano} onChange={(e) => setAno(e.target.value)} />
             </div>
           </LinhaDupla>
 
-          {/* 7. Botões */}
-          <BotaoConfirmar onClick={onConfirmarPagamento}>
+          <BotaoConfirmar type="button" onClick={enviarPedido}>
             Finalizar Pagamento
           </BotaoConfirmar>
           <BotaoVoltar onClick={onVoltarParaEntrega}>
