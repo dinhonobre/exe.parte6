@@ -23,6 +23,15 @@ type Produto = {
   nome: string;
 };
 
+type ItemCarrinho = {
+  id: number;
+  titulo: string;
+  preco: string;
+  imagem: string;
+  quantidade: number;
+};
+
+
 const Perfil = () => {
   const [produtos, setProdutos] = useState<Produto[]>([]);
   const [loading, setLoading] = useState(false);
@@ -66,10 +75,19 @@ const Perfil = () => {
   }, [itensCarrinho]);
 
   const adicionarAoCarrinhoRedux = (produto: Produto) => {
-    if (!produto) return;
-    dispatch(adicionarAoCarrinhoAction(produto));
-    setCarrinhoAberto(true);
+  if (!produto) return;
+
+  const item: ItemCarrinho = {
+    id: produto.id,
+    titulo: produto.nome,
+    preco: produto.preco,
+    imagem: produto.foto,
+    quantidade: 1
   };
+
+  dispatch(adicionarAoCarrinhoAction(item));
+  setCarrinhoAberto(true);
+};
 
   const abrirEntrega = () => {
     setCarrinhoAberto(false);

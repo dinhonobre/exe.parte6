@@ -71,7 +71,8 @@ export const Titulo = styled.h3`
   font-weight: 900;
   font-size: 18px;
   color: #e66767;
-  margin: 0;
+  margin-top: 6px;
+  padding: 0;
 `;
 
 export const Preco = styled.p`
@@ -79,7 +80,16 @@ export const Preco = styled.p`
   font-weight: 400;
   font-size: 14px;
   color: #e66767;
-  margin: 4px 0 0 0;
+  margin-bottom: 6px;
+`;
+
+export const Quantidade = styled.p`
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 14px;
+  color: #e66767;
+  margin-left: 0;
+  margin-bottom: 6px;
 `;
 
 export const Lixeira = styled.img`
@@ -94,7 +104,9 @@ export const Lixeira = styled.img`
 export const ValorTotalContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
+  align-items: center; /* Alinha verticalmente */
+  margin-top: 48px;
+  margin-bottom: 0px;
   font-family: Roboto;
   font-weight: 700;
   font-size: 14px;
@@ -102,18 +114,17 @@ export const ValorTotalContainer = styled.div`
 `;
 
 export const ValorTotalTexto = styled.p`
-  width: 65px;
-  height: 16px;
   text-align: left;
+  white-space: nowrap;
   color: #FFEBD9;
 `;
 
 export const ValorTotalValor = styled.p`
-  width: 65px;
-  height: 16px;
   text-align: right;
+  white-space: nowrap;
   color: #FFEBD9;
 `;
+
 
 export const BotaoContinuar = styled.button`
   width: 100%;
@@ -127,7 +138,7 @@ export const BotaoContinuar = styled.button`
   letter-spacing: 0%;
   text-align: center;
   border: none;
-  margin-top: 20px;
+  margin-top: 0px;
   cursor: pointer;
 
   &:hover {

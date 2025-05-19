@@ -8,20 +8,22 @@ import {
   Info,
   Titulo,
   Preco,
+  Quantidade,
   Lixeira,
   ValorTotalContainer,
   ValorTotalTexto,
   ValorTotalValor,
   BotaoContinuar,
-  SidebarFundo, // Importe o novo estilo
+  SidebarFundo,
 } from "./styles";
 import IconeLixeira from "../../assets/lixeira.icon.png";
 
-interface Produto {
+interface ItemCarrinho {
   id: number;
-  nome: string;
+  titulo: string;
   preco: string;
-  foto?: string;
+  imagem: string;
+  quantidade: number;
 }
 
 interface SidebarCarrinhoProps {
@@ -35,7 +37,8 @@ const SidebarCarrinho: React.FC<SidebarCarrinhoProps> = ({
 }) => {
   const produtosCarrinho = useSelector(
     (state: any) => state.carrinho.itens
-  ) as Produto[];
+  ) as ItemCarrinho[];
+
   const dispatch = useDispatch();
 
   const handleRemoverItem = (id: number) => {
@@ -45,28 +48,31 @@ const SidebarCarrinho: React.FC<SidebarCarrinhoProps> = ({
     }
   };
 
-  const calcularTotal = () => {
-    return produtosCarrinho.reduce((total: number, produto: Produto) => {
-      return total + Number(produto.preco);
+  const calcularTotal = (): number => {
+    return produtosCarrinho.reduce((total: number, produto) => {
+      return total + Number(produto.preco) * produto.quantidade;
     }, 0);
   };
 
   const stopPropagation = (event: React.MouseEvent) => {
-    event.stopPropagation(); // Impede que o clique dentro da sidebar feche o fundo
+    event.stopPropagation();
   };
-  console.log('Produtos no carrinho:', produtosCarrinho);
-
 
   return (
     <SidebarFundo onClick={onFechar}>
       <Sidebar onClick={stopPropagation}>
-        {produtosCarrinho.map((produto: Produto) => (
+        {produtosCarrinho.map((produto: ItemCarrinho) => (
           <Item key={produto.id}>
-            <ImagemProduto src={produto.foto} alt={produto.nome} />
+            <ImagemProduto src={produto.imagem} alt={produto.titulo} />
 
             <Info>
-              <Titulo>{produto.nome}</Titulo>
-              <Preco>R$ {Number(produto.preco).toFixed(2)}</Preco>
+              <Titulo>{produto.titulo}</Titulo>
+              <Quantidade>
+                {produto.quantidade}
+              </Quantidade>
+              <Preco>
+               {(Number(produto.preco) * produto.quantidade).toFixed(2)}
+              </Preco>
             </Info>
             <Lixeira
               onClick={() => handleRemoverItem(produto.id)}
