@@ -10,7 +10,8 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  width: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* Evita scroll horizontal */
@@ -28,10 +29,13 @@ header {
 
 /* Container para centralizar conteúdo */
 .container {
+  width: 100%;
   max-width: var(--largura-maxima-conteudo);
   margin: 0 auto;
   padding: 0 var(--espacamento-padrao);
+  box-sizing: border-box;
 }
+
 
 /* Imagem de apresentação com largura total e altura controlada */
 .full-width-image {

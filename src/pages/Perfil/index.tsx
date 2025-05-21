@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import CardPerfil from "../../components/CardPerfil";
-import PerfilComModal from "../../components/PerfilComModal";
 import SidebarCarrinho from "../../components/SidebarCarrinho";
-import { Container, Overlay, ProdutoContainer } from "./styles";
+import {
+  Container,
+  Overlay,
+  ProdutoContainer,
+} from "./styles";
 import PerfilHeader from "../../components/PerfilHeader";
 import Footer from "../../components/Footer";
 import Apresentacao from "../../components/Apresentacao";
@@ -30,7 +33,6 @@ type ItemCarrinho = {
   imagem: string;
   quantidade: number;
 };
-
 
 const Perfil = () => {
   const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -75,19 +77,19 @@ const Perfil = () => {
   }, [itensCarrinho]);
 
   const adicionarAoCarrinhoRedux = (produto: Produto) => {
-  if (!produto) return;
+    if (!produto) return;
 
-  const item: ItemCarrinho = {
-    id: produto.id,
-    titulo: produto.nome,
-    preco: produto.preco,
-    imagem: produto.foto,
-    quantidade: 1
+    const item: ItemCarrinho = {
+      id: produto.id,
+      titulo: produto.nome,
+      preco: produto.preco,
+      imagem: produto.foto,
+      quantidade: 1,
+    };
+
+    dispatch(adicionarAoCarrinhoAction(item));
+    setCarrinhoAberto(true);
   };
-
-  dispatch(adicionarAoCarrinhoAction(item));
-  setCarrinhoAberto(true);
-};
 
   const abrirEntrega = () => {
     setCarrinhoAberto(false);
@@ -100,11 +102,10 @@ const Perfil = () => {
   };
 
   const fecharPagamento = (orderIdParam: string) => {
-  setMostrarPagamento(false);
-  setMostrarConfirmacao(true);
-  setOrderId(orderIdParam);
-};
-
+    setMostrarPagamento(false);
+    setMostrarConfirmacao(true);
+    setOrderId(orderIdParam);
+  };
 
   const fecharConfirmacao = () => {
     setMostrarConfirmacao(false);
@@ -137,99 +138,99 @@ const Perfil = () => {
 
   return (
     <>
-      <PerfilHeader />
-      <Apresentacao />
-      {carrinhoAberto &&
-        !mostrarEntrega &&
-        !mostrarPagamento &&
-        !mostrarConfirmacao && <Overlay onClick={fecharCarrinho} />}
-      {mostrarConfirmacao && <Overlay />}
-      <Container carrinhoAberto={carrinhoAberto}>
-        <ProdutoContainer>
-          {produtos.slice(0, 6).map((produto) => {
-            return (
-              <CardPerfil
-                key={produto.id}
-                id={produto.id}
-                titulo={produto.nome}
-                descricao={produto.descricao}
-                imagem={produto.foto}
-                preco={produto.preco}
-                aoAdicionarAoCarrinho={() => {
-                  setProdutoSelecionado(produto);
-                  setModalAberto(true);
-                }}
-              />
-            );
-          })}
-        </ProdutoContainer>
+        <PerfilHeader />
+        <Apresentacao />
+        {carrinhoAberto &&
+          !mostrarEntrega &&
+          !mostrarPagamento &&
+          !mostrarConfirmacao && <Overlay onClick={fecharCarrinho} />}
+        {mostrarConfirmacao && <Overlay />}
+        <Container carrinhoAberto={carrinhoAberto}>
+          <ProdutoContainer>
+              {produtos.slice(0, 6).map((produto) => (
+                <CardPerfil
+                  key={produto.id}
+                  id={produto.id}
+                  titulo={produto.nome}
+                  descricao={produto.descricao}
+                  imagem={produto.foto}
+                  preco={produto.preco}
+                  aoAdicionarAoCarrinho={() => {
+                    setProdutoSelecionado(produto);
+                    setModalAberto(true);
+                  }}
+                />
+              ))}
+          </ProdutoContainer>
 
-        {modalAberto && produtoSelecionado && (
+          {modalAberto && produtoSelecionado && (
+            <RestauranteModal
+              restaurante={{
+                id: produtoSelecionado.id,
+                titulo: produtoSelecionado.nome,
+                descricao: produtoSelecionado.descricao,
+                capa: produtoSelecionado.foto,
+                preco: Number(produtoSelecionado.preco),
+                avaliacao: 0,
+                tipo: "",
+              }}
+              onClose={() => {
+                setModalAberto(false);
+                setProdutoSelecionado(null);
+              }}
+              onAddToCart={() => adicionarAoCarrinhoRedux(produtoSelecionado)}
+            />
+          )}
+        </Container>
+
+        {modalRestauranteAberto && restauranteSelecionado && (
           <RestauranteModal
-            restaurante={{
-              id: produtoSelecionado.id,
-              titulo: produtoSelecionado.nome,
-              descricao: produtoSelecionado.descricao,
-              capa: produtoSelecionado.foto,
-              preco: Number(produtoSelecionado.preco),
-              avaliacao: 0,
-              tipo: "",
+            restaurante={restauranteSelecionado}
+            onClose={fecharModalRestaurante}
+            onAddToCart={() => {
+              adicionarAoCarrinhoRedux({
+                ...restauranteSelecionado,
+                imagem: restauranteSelecionado.capa,
+              });
+              setModalRestauranteAberto(false);
+              setCarrinhoAberto(true);
             }}
-            onClose={() => {
-              setModalAberto(false);
-              setProdutoSelecionado(null);
-            }}
-            onAddToCart={() => adicionarAoCarrinhoRedux(produtoSelecionado)}
           />
         )}
-      </Container>
 
-      {modalRestauranteAberto && restauranteSelecionado && (
-        <RestauranteModal
-          restaurante={restauranteSelecionado}
-          onClose={fecharModalRestaurante}
-          onAddToCart={() => {
-            adicionarAoCarrinhoRedux({
-              ...restauranteSelecionado,
-              imagem: restauranteSelecionado.capa,
-            });
-            setModalRestauranteAberto(false);
-            setCarrinhoAberto(true);
-          }}
-        />
-      )}
+        {carrinhoAberto && !mostrarEntrega && !mostrarPagamento && (
+          <SidebarCarrinho
+            aoContinuar={abrirEntrega}
+            onFechar={fecharCarrinho}
+          />
+        )}
+        {mostrarEntrega && !mostrarPagamento && (
+          <Entrega
+            onVoltar={() => setMostrarEntrega(false)}
+            onContinuarPagamento={abrirPagamento}
+          />
+        )}
+        {mostrarPagamento && (
+          <Pagamento
+            onFecharPagamento={() => setMostrarPagamento(false)}
+            onPedidoConfirmado={(id: string) => {
+              setOrderId(id);
+              setMostrarPagamento(false);
+              setMostrarConfirmacao(true);
+            }}
+            onVoltarParaEntrega={() => {
+              setMostrarPagamento(false);
+              setMostrarEntrega(true);
+            }}
+          />
+        )}
 
-      {carrinhoAberto && !mostrarEntrega && !mostrarPagamento && (
-        <SidebarCarrinho aoContinuar={abrirEntrega} onFechar={fecharCarrinho} />
-      )}
-      {mostrarEntrega && !mostrarPagamento && (
-        <Entrega
-          onVoltar={() => setMostrarEntrega(false)}
-          onContinuarPagamento={abrirPagamento}
-        />
-      )}
-      {mostrarPagamento && (
-        <Pagamento
-          onFecharPagamento={() => setMostrarPagamento(false)}
-          onPedidoConfirmado={(id: string) => {
-            setOrderId(id);
-            setMostrarPagamento(false);
-            setMostrarConfirmacao(true);
-          }}
-          onVoltarParaEntrega={() => {
-            setMostrarPagamento(false);
-            setMostrarEntrega(true);
-          }}
-        />
-      )}
-
-      {mostrarConfirmacao && (
-        <Confirmacao
-          onFecharConfirmacao={fecharConfirmacao}
-          orderId={orderId}
-        />
-      )}
-
+        {mostrarConfirmacao && (
+          <Confirmacao
+            onFecharConfirmacao={fecharConfirmacao}
+            orderId={orderId}
+          />
+        )}
       <Footer />
     </>
   );

@@ -31,6 +31,11 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
     z-index: -1;
   }
 
+
+  @media (max-width: 1024px) {
+     gap: 190px;
+  }
+
   @media (max-width: 768px) {
     height: 150px;
     padding: 0 16px;
@@ -49,6 +54,7 @@ export const Title = styled.h1`
   font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-size: 18px;
+  left: 170px;
   color: #e66767;
 
   @media (max-width: 768px) {

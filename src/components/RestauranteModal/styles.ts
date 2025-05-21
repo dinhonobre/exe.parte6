@@ -12,7 +12,6 @@ export const ModalOverlay = styled.div`
   align-items: center;
   z-index: 1000;
 
-  /* Responsividade */
   @media (max-width: 768px) {
     background-color: rgba(0, 0, 0, 0.7);
   }
@@ -30,14 +29,12 @@ export const ModalContainer = styled.div`
   padding: 32px;
   box-sizing: border-box;
 
-  /* Ajustes para responsividade */
   @media (max-width: 1200px) {
     width: 90%;
     left: 5%;
     top: 30%;
   }
 
-  /* Mobile view adjustments */
   @media (max-width: 768px) {
     flex-direction: column;
     width: 90%;
@@ -45,8 +42,11 @@ export const ModalContainer = styled.div`
     top: 20%;
     padding: 20px;
   }
-`;
 
+  @media (max-width: 480px) {
+    padding: 16px;
+  }
+`;
 
 export const CloseButton = styled.button`
   position: absolute;
@@ -60,17 +60,16 @@ export const CloseButton = styled.button`
   font-size: 24px;
   line-height: 16px;
   cursor: pointer;
-  font-weight: 100; 
-
+  font-weight: 100;
 `;
 
 export const AddButton = styled.button`
   width: 218px;
-  height: 40px; /* aumentar um pouco a altura para ficar melhor */
-  background-color: #fff; /* fundo branco para contraste */
-  color: #E66767; /* texto vermelho */
+  height: 40px;
+  background-color: #fff;
+  color: #E66767;
   border: none;
-  margin-top: auto; 
+  margin-top: auto;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -79,6 +78,10 @@ export const AddButton = styled.button`
   &:hover {
     background-color: #d14d4d;
     color: #fff;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
   }
 `;
 
@@ -89,19 +92,30 @@ export const ButtonText = styled.span`
   line-height: 100%;
   letter-spacing: 0;
   text-align: center;
-  color: inherit; /* herda a cor do AddButton */
+  color: inherit;
 `;
 
 export const Content = styled.div`
   display: flex;
   flex-direction: row;
   gap: 32px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 export const Image = styled.img`
   width: 280px;
   height: 280px;
   object-fit: cover;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+  }
 `;
 
 export const Info = styled.div`
@@ -117,9 +131,8 @@ export const Title = styled.h2`
   font-size: 18px;
   line-height: 100%;
   letter-spacing: 0;
-  text-align: center;
-  color: #FFFFFF;
   text-align: left;
+  color: #FFFFFF;
   margin-bottom: 24px;
   margin-top: 0;
 `;
@@ -133,4 +146,3 @@ export const Description = styled.p`
   color: #FFFFFF;
   margin: 0 0 16px;
 `;
-

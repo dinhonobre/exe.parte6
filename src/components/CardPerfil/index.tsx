@@ -1,27 +1,27 @@
 // CardPerfil.tsx
-import React from 'react'
+import React from "react";
 import {
   Card,
   CardImagem,
   CardTitulo,
   CardDescricao,
-  CardBotao
-} from './styles'
+  CardBotao,
+} from "./styles";
 
 type Props = {
-  id: number
-  titulo: string
-  descricao: string
-  imagem: string
-  preco: string
+  id: number;
+  titulo: string;
+  descricao: string;
+  imagem: string;
+  preco: string;
   aoAdicionarAoCarrinho: (produto: {
-    id: number
-    titulo: string
-    descricao: string
-    imagem: string
-    preco: string
-  }) => void
-}
+    id: number;
+    titulo: string;
+    descricao: string;
+    imagem: string;
+    preco: string;
+  }) => void;
+};
 
 const CardPerfil = ({
   id,
@@ -29,27 +29,27 @@ const CardPerfil = ({
   descricao,
   imagem,
   preco,
-  aoAdicionarAoCarrinho
+  aoAdicionarAoCarrinho,
 }: Props) => {
   const handleClick = () => {
-    aoAdicionarAoCarrinho({ id, titulo, descricao, imagem, preco })
-  }
+    aoAdicionarAoCarrinho({ id, titulo, descricao, imagem, preco });
+  };
 
   return (
-    <Card>
-      <div style={{ position: 'relative' }}>
+      <Card>
+      <div style={{ position: "relative" }}>
         <CardImagem
-          src={imagem || 'https://via.placeholder.com/300x200?text=Sem+Imagem'} 
+          src={imagem || "https://via.placeholder.com/300x200?text=Sem+Imagem"}
           alt={titulo}
         />
       </div>
       <CardTitulo>{titulo}</CardTitulo>
       <CardDescricao>{descricao}</CardDescricao>
-      <div style={{ display: 'flex', gap: '10px' }}>
+      <div style={{ display: "flex", gap: "10px" }}>
         <CardBotao onClick={handleClick}>Adicionar ao carrinho</CardBotao>
       </div>
     </Card>
-  )
-}
+  );
+};
 
-export default CardPerfil
+export default CardPerfil;

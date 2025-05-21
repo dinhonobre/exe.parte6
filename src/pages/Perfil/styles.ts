@@ -7,24 +7,22 @@ interface Props {
 
 export const Container = styled.div<Props>`
   display: grid;
-  grid-column: 1 / -1;
+  grid-template-columns: 1fr;
   grid-template-rows: auto auto;
   gap: 20px;
   width: 100%;
-  max-width: 100%; /* Limitar largura máxima para centralizar */
-  margin: 0 auto; /* Centraliza horizontalmente */
-  background:#FFF8F2;
-  opacity: ${(props) =>
-    props.carrinhoAberto ? 0.5 : 1}; /* Opacidade ajustável */
+  margin: 0 auto;
+  background: #FFF8F2;
+  opacity: ${(props) => (props.carrinhoAberto ? 0.5 : 1)};
   transition: opacity 0.3s ease;
-  justify-items: center; /* Centraliza os itens horizontalmente dentro de cada célula da grid */
-  align-items: center; /* Centraliza os itens verticalmente dentro de cada célula da grid */
 
-  /* Responsividade */
+  @media (min-width: 1025px) {
+    grid-template-columns: 1fr;
+    max-width: 1440px;
+  }
+
   @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* Uma coluna em telas menores */
-    width: 90%;
-    margin: 20px auto;
+    padding: 0 20px;
     gap: 15px;
   }
 
@@ -34,8 +32,7 @@ export const Container = styled.div<Props>`
       auto-fit,
       minmax(300px, 1fr)
     ); /* Adaptável para tablets */
-    width: 95%;
-    margin: 30px auto;
+    margin: 0 auto;
   }
 `;
 
@@ -52,21 +49,22 @@ export const Overlay = styled.div`
 
 export const Header = styled.header`
   width: 100%;
-  max-width: 100%;
-  height: auto; /* Altura automática para se adaptar ao conteúdo */
-  margin: 0 auto;
+  height: auto;
+  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px; /* Padding menor em telas menores */
+  padding: 15px 40px;
   background-color: #fff;
-  flex-direction: row; /* Garante que os itens fiquem em linha */
+  flex-direction: row;
   flex-wrap: wrap;
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+    padding: 15px 20px;
   }
 `;
 
@@ -108,32 +106,32 @@ export const CarrinhoTexto = styled.h2`
     font-size: 16px;
     text-align: left; /* Alinha à esquerda em telas pequenas */
   }
-`;
-
-export const ImagemApresentacao = styled.img`
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 20px auto;
-`;
+`
 
 export const ProdutoContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanhos iguais */
-  grid-template-rows: repeat(2, auto); /* 2 linhas automáticas */
+  max-width: 1280px; /* Evita ultrapassar o limite da tela */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px 40px;
-  margin: 0 auto;
   background: #FFF8F2;
-  padding: 48px 8px;
-  max-width: 1024px; /* limite de largura */
   width: 100%;
-  justify-items: center; /* centraliza cada card dentro da célula */
+  box-sizing: border-box;
+  justify-items: center;
+  padding: 56px 170px;
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* 1 coluna no mobile */
-    grid-template-rows: auto;
-    width: 90%;
+@media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas entre 1024 e 1279 */
+    padding: 40px; /* padding menor para caber melhor */
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas em telas grandes */
+    padding: 56px 170px;
   }
 `;
 

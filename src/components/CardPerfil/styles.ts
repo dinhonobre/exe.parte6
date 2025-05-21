@@ -2,15 +2,19 @@ import styled from 'styled-components'
 
 export const Card = styled.div`
   width: 320px;
-  height: 338px; /* altura fixa */
-  background-color: #E66767;
+  height: 338px;
+  background: #E66767;
   border: 1px solid #e66767;
   padding: 16px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* ajusta layout */
+  justify-content: space-between;
   overflow: hidden;
+
+  @media (max-width: 360px) {
+    width: 100%;
+  }
 `;
 
 export const CardImagem = styled.img`
