@@ -36,12 +36,14 @@ export const ModalContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    width: 90%;
-    height: auto;
-    top: 20%;
-    padding: 20px;
-  }
+  flex-direction: column;
+  width: 90%;
+  height: auto;
+  padding: 20px;
+  top: 0;
+  left: 0;
+}
+
 
   @media (max-width: 480px) {
     padding: 16px;
@@ -99,6 +101,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: row;
   gap: 32px;
+  width: 100%; // Adicione isso
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -115,6 +118,7 @@ export const Image = styled.img`
     width: 100%;
     height: auto;
     max-height: 300px;
+    align-self: center; // ajuda no alinhamento
   }
 `;
 
@@ -123,7 +127,14 @@ export const Info = styled.div`
   flex-direction: column;
   flex: 1;
   justify-content: flex-start;
+  width: 100%; // Para telas pequenas
+
+  @media (max-width: 768px) {
+    align-items: center;
+    text-align: center;
+  }
 `;
+
 
 export const Title = styled.h2`
   font-family: 'Roboto', sans-serif;
@@ -135,6 +146,11 @@ export const Title = styled.h2`
   color: #FFFFFF;
   margin-bottom: 24px;
   margin-top: 0;
+
+  @media (max-width: 768px) {
+  font-size: 16px;
+}
+
 `;
 
 export const Description = styled.p`
@@ -145,4 +161,9 @@ export const Description = styled.p`
   letter-spacing: 0;
   color: #FFFFFF;
   margin: 0 0 16px;
+
+  @media (max-width: 768px) {
+  font-size: 16px;
+}
+
 `;

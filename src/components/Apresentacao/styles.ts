@@ -28,7 +28,7 @@ export const TextoTipo = styled.h4`
   position: absolute;
   top: 8px;
   left: 170px;
-  font-family: "Roboto", sans-serif;
+  font-family: Roboto;
   font-weight: 100;
   font-size: 32px;
   line-height: 100%;

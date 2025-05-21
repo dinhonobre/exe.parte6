@@ -40,6 +40,7 @@ const Listagem = () => {
       {restaurantes.map((restaurante) => (
         <RestauranteCard
           key={restaurante.id}
+          id={Number(restaurante.id)}
           imagem={restaurante.capa}
           titulo={restaurante.titulo}
           nota={restaurante.avaliacao}

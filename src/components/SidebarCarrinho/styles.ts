@@ -73,6 +73,10 @@ export const Titulo = styled.h3`
   color: #e66767;
   margin-top: 6px;
   padding: 0;
+  max-width: 200px;   /* limita a largura máxima do título */
+  white-space: nowrap; /* impede quebra de linha */
+  overflow: hidden;    /* esconde o texto que ultrapassa */
+  text-overflow: ellipsis; /* adiciona "..." no final */
 `;
 
 export const Preco = styled.p`

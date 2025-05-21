@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import CardPerfil from "../../components/CardPerfil";
 import SidebarCarrinho from "../../components/SidebarCarrinho";
-import {
-  Container,
-  Overlay,
-  ProdutoContainer,
-} from "./styles";
+import { Container, Overlay, ProdutoContainer } from "./styles";
 import PerfilHeader from "../../components/PerfilHeader";
 import Footer from "../../components/Footer";
 import Apresentacao from "../../components/Apresentacao";
@@ -52,23 +49,27 @@ const Perfil = () => {
   const [orderId, setOrderId] = useState("");
   const dispatch = useDispatch();
 
+  const { id } = useParams();
+  const [restaurante, setRestaurante] = useState<any>(null);
+
   useEffect(() => {
-    const fetchProdutos = async () => {
+    const fetchRestaurante = async () => {
       try {
         const response = await fetch(
-          "https://fake-api-tau.vercel.app/api/efood/restaurantes/1"
+          `https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`
         );
         const data = await response.json();
+        setRestaurante(data);
         if (data.cardapio) {
           setProdutos(data.cardapio);
         }
       } catch (error) {
-        console.error("Erro ao carregar produtos:", error);
+        console.error("Erro ao carregar restaurante:", error);
       }
     };
 
-    fetchProdutos();
-  }, []);
+    fetchRestaurante();
+  }, [id]);
 
   useEffect(() => {
     if (itensCarrinho.length === 0) {
@@ -138,99 +139,100 @@ const Perfil = () => {
 
   return (
     <>
-        <PerfilHeader />
-        <Apresentacao />
-        {carrinhoAberto &&
-          !mostrarEntrega &&
-          !mostrarPagamento &&
-          !mostrarConfirmacao && <Overlay onClick={fecharCarrinho} />}
-        {mostrarConfirmacao && <Overlay />}
-        <Container carrinhoAberto={carrinhoAberto}>
-          <ProdutoContainer>
-              {produtos.slice(0, 6).map((produto) => (
-                <CardPerfil
-                  key={produto.id}
-                  id={produto.id}
-                  titulo={produto.nome}
-                  descricao={produto.descricao}
-                  imagem={produto.foto}
-                  preco={produto.preco}
-                  aoAdicionarAoCarrinho={() => {
-                    setProdutoSelecionado(produto);
-                    setModalAberto(true);
-                  }}
-                />
-              ))}
-          </ProdutoContainer>
-
-          {modalAberto && produtoSelecionado && (
-            <RestauranteModal
-              restaurante={{
-                id: produtoSelecionado.id,
-                titulo: produtoSelecionado.nome,
-                descricao: produtoSelecionado.descricao,
-                capa: produtoSelecionado.foto,
-                preco: Number(produtoSelecionado.preco),
-                avaliacao: 0,
-                tipo: "",
+      <PerfilHeader />
+      {restaurante ? (
+        <Apresentacao tipo={restaurante.tipo} nome={restaurante.titulo} />
+      ) : (
+        <p>Carregando restaurante...</p>
+      )}
+      {carrinhoAberto &&
+        !mostrarEntrega &&
+        !mostrarPagamento &&
+        !mostrarConfirmacao && <Overlay onClick={fecharCarrinho} />}
+      {mostrarConfirmacao && <Overlay />}
+      <Container carrinhoAberto={carrinhoAberto}>
+        <ProdutoContainer>
+          {produtos.slice(0, 6).map((produto) => (
+            <CardPerfil
+              key={produto.id}
+              id={produto.id}
+              titulo={produto.nome}
+              descricao={produto.descricao}
+              imagem={produto.foto}
+              preco={produto.preco}
+              aoAdicionarAoCarrinho={() => {
+                setProdutoSelecionado(produto);
+                setModalAberto(true);
               }}
-              onClose={() => {
-                setModalAberto(false);
-                setProdutoSelecionado(null);
-              }}
-              onAddToCart={() => adicionarAoCarrinhoRedux(produtoSelecionado)}
             />
-          )}
-        </Container>
+          ))}
+        </ProdutoContainer>
 
-        {modalRestauranteAberto && restauranteSelecionado && (
+        {modalAberto && produtoSelecionado && (
           <RestauranteModal
-            restaurante={restauranteSelecionado}
-            onClose={fecharModalRestaurante}
-            onAddToCart={() => {
-              adicionarAoCarrinhoRedux({
-                ...restauranteSelecionado,
-                imagem: restauranteSelecionado.capa,
-              });
-              setModalRestauranteAberto(false);
-              setCarrinhoAberto(true);
+            restaurante={{
+              id: produtoSelecionado.id,
+              titulo: produtoSelecionado.nome,
+              descricao: produtoSelecionado.descricao,
+              capa: produtoSelecionado.foto,
+              preco: Number(produtoSelecionado.preco),
+              avaliacao: 0,
+              tipo: "",
             }}
+            onClose={() => {
+              setModalAberto(false);
+              setProdutoSelecionado(null);
+            }}
+            onAddToCart={() => adicionarAoCarrinhoRedux(produtoSelecionado)}
           />
         )}
+      </Container>
 
-        {carrinhoAberto && !mostrarEntrega && !mostrarPagamento && (
-          <SidebarCarrinho
-            aoContinuar={abrirEntrega}
-            onFechar={fecharCarrinho}
-          />
-        )}
-        {mostrarEntrega && !mostrarPagamento && (
-          <Entrega
-            onVoltar={() => setMostrarEntrega(false)}
-            onContinuarPagamento={abrirPagamento}
-          />
-        )}
-        {mostrarPagamento && (
-          <Pagamento
-            onFecharPagamento={() => setMostrarPagamento(false)}
-            onPedidoConfirmado={(id: string) => {
-              setOrderId(id);
-              setMostrarPagamento(false);
-              setMostrarConfirmacao(true);
-            }}
-            onVoltarParaEntrega={() => {
-              setMostrarPagamento(false);
-              setMostrarEntrega(true);
-            }}
-          />
-        )}
+      {modalRestauranteAberto && restauranteSelecionado && (
+        <RestauranteModal
+          restaurante={restauranteSelecionado}
+          onClose={fecharModalRestaurante}
+          onAddToCart={() => {
+            adicionarAoCarrinhoRedux({
+              ...restauranteSelecionado,
+              imagem: restauranteSelecionado.capa,
+            });
+            setModalRestauranteAberto(false);
+            setCarrinhoAberto(true);
+          }}
+        />
+      )}
 
-        {mostrarConfirmacao && (
-          <Confirmacao
-            onFecharConfirmacao={fecharConfirmacao}
-            orderId={orderId}
-          />
-        )}
+      {carrinhoAberto && !mostrarEntrega && !mostrarPagamento && (
+        <SidebarCarrinho aoContinuar={abrirEntrega} onFechar={fecharCarrinho} />
+      )}
+      {mostrarEntrega && !mostrarPagamento && (
+        <Entrega
+          onVoltar={() => setMostrarEntrega(false)}
+          onContinuarPagamento={abrirPagamento}
+        />
+      )}
+      {mostrarPagamento && (
+        <Pagamento
+          onFecharPagamento={() => setMostrarPagamento(false)}
+          onPedidoConfirmado={(id: string) => {
+            setOrderId(id);
+            setMostrarPagamento(false);
+            setMostrarConfirmacao(true);
+          }}
+          onVoltarParaEntrega={() => {
+            setMostrarPagamento(false);
+            setMostrarEntrega(true);
+          }}
+        />
+      )}
+
+      {mostrarConfirmacao && (
+        <Confirmacao
+          onFecharConfirmacao={fecharConfirmacao}
+          orderId={orderId}
+        />
+      )}
       <Footer />
     </>
   );

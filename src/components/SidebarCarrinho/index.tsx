@@ -66,7 +66,7 @@ const SidebarCarrinho: React.FC<SidebarCarrinhoProps> = ({
             <ImagemProduto src={produto.imagem} alt={produto.titulo} />
 
             <Info>
-              <Titulo>{produto.titulo}</Titulo>
+              <Titulo title={produto.titulo}>{produto.titulo}</Titulo>
               <Quantidade>
                 {produto.quantidade}
               </Quantidade>

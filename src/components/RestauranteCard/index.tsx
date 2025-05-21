@@ -14,6 +14,7 @@ import estrela from "../../assets/star_favorite.png";
 import { Link } from "react-router-dom";
 
 interface Props {
+  id: number;
   imagem: string;
   titulo: string;
   nota: number | undefined;
@@ -23,6 +24,7 @@ interface Props {
 }
 
 const RestauranteCard = ({
+  id,
   imagem,
   titulo,
   nota,
@@ -47,9 +49,10 @@ const RestauranteCard = ({
       {endereco && (
         <p style={{ margin: "0.5rem 0", fontStyle: "italic" }}>{endereco}</p>
       )}
-      <Link to="/perfil" style={{ textDecoration: "none" }}>
-        <Botao>Saiba mais</Botao>
-      </Link>
+      <Link to={`/perfil/${id}`} style={{ textDecoration: "none" }}>
+  <Botao>Saiba mais</Botao>
+</Link>
+
     </Card>
   );
 };
