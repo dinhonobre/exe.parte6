@@ -99,3 +99,65 @@ export const ContentWrapper = styled.div`
     gap: 8px;
   }
 `;
+
+
+/*
+export const Header = styled.header`
+  width: 100%;
+  height: auto;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #fff;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 15px 20px;
+  }
+`;
+
+export const Logo = styled.img`
+  width: 125px;
+  height: auto;
+
+  @media (max-width: 768px) {
+    width: 100px;
+  }
+`;
+
+export const TextoRestaurante = styled.h1`
+  font-family: Roboto;
+  font-weight: 900;
+  font-size: 18px;
+  text-align: center;
+  color: #e66767;
+  margin-top: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    text-align: left;
+    width: 100%;
+  }
+`;
+
+export const CarrinhoTexto = styled.h2`
+  font-family: Roboto;
+  font-weight: 900;
+  font-size: 18px;
+  text-align: right;
+  color: #e66767;
+  margin-top: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    text-align: left;
+  }
+`;
+*/

@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const Card = styled.div`
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
   height: 338px;
   background: #E66767;
   border: 1px solid #e66767;
@@ -41,6 +42,7 @@ export const CardDescricao = styled.p`
     display: none; /* Chrome, Safari, Opera */
   }
 `;
+
 
 export const CardBotao = styled.button`
   width: 100%;

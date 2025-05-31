@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: relative;
   width: 100%;
-  max-width: 1440px;
+  max-width: none;
   height: 280px;
   margin: 0 auto; /* centraliza em telas maiores */
   overflow: hidden;
@@ -13,6 +13,10 @@ export const Container = styled.div`
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  @media (min-width: 1441px) {
+    height: 400px; /* altura maior em telas maiores */
   }
 
   @media (max-width: 768px) {
