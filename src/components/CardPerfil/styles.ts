@@ -1,10 +1,11 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Card = styled.div`
   width: 100%;
-  max-width: 320px;
-  height: 338px;
-  background: #E66767;
+  min-width: 280px;
+  max-width: 100%; /* deixa o grid controlar */
+  height: auto;
+  background: #e66767;
   border: 1px solid #e66767;
   padding: 16px;
   box-sizing: border-box;
@@ -27,11 +28,11 @@ export const CardImagem = styled.img`
 
 export const CardDescricao = styled.p`
   font-size: 0.875rem; /* 14px */
-  color: #FFEBD9;
+  color: #ffebd9;
   margin: 10px 0;
   line-height: 1.4;
-  flex-grow: 1;       /* ocupa o espaço disponível */
-  overflow-y: auto;   /* adiciona scroll vertical se texto for maior */
+  flex-grow: 1; /* ocupa o espaço disponível */
+  overflow-y: auto; /* adiciona scroll vertical se texto for maior */
   white-space: normal;
 
   /* Esconde a barra de rolagem vertical */
@@ -43,12 +44,11 @@ export const CardDescricao = styled.p`
   }
 `;
 
-
 export const CardBotao = styled.button`
   width: 100%;
   padding: 8px; /* maior para melhor clique */
-  background-color: #FFEBD9;
-  color: #E66767;
+  background-color: #ffebd9;
+  color: #e66767;
   border: none;
   font-size: 1rem;
   font-weight: 700;
@@ -58,18 +58,17 @@ export const CardBotao = styled.button`
 
   &:hover {
     background-color: #d14d4d;
-    color: #FFEBD9;
+    color: #ffebd9;
   }
 `;
-
 
 export const CardTitulo = styled.h3`
   font-size: 1.125rem; /* 18px */
   font-weight: bold;
-  color: #FFEBD9;
+  color: #ffebd9;
   margin: 0;
   padding-bottom: 8px;
-`
+`;
 
 export const Categoria = styled.span`
   position: absolute;
@@ -88,4 +87,4 @@ export const Categoria = styled.span`
   border-radius: 4px;
   padding: 0 8px;
   line-height: 1;
-`
+`;

@@ -38,6 +38,10 @@ export const TextoTipo = styled.h4`
   line-height: 100%;
   color: #ffffff;
 
+  @media (min-width: 1440px) {
+    left: 300px;
+  }
+
   @media (max-width: 1024px) {
      left: 100px;
   }
@@ -65,6 +69,10 @@ export const TextoTitulo = styled.h2`
   line-height: 100%;
   color: #ffffff;
   margin-bottom: 32px;
+
+  @media (min-width: 1440px) {
+    left: 300px;
+  }
 
   @media (max-width: 1024px) {
      left: 100px;

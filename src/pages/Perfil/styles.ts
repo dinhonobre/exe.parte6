@@ -49,8 +49,11 @@ export const Overlay = styled.div`
 
 export const ProdutoContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 32px; /* vertical e horizontal agora serão 32px */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 320px));
+  gap: 32px;
+  padding: 56px 40px;
+  max-width: calc(2560px - 2 * 170px);
+  margin: 0 auto;
   background: #FFF8F2;
   width: 100%;
   box-sizing: border-box;
