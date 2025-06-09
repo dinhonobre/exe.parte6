@@ -73,7 +73,7 @@ export const ProdutoContainer = styled.div`
   @media (min-width: 1280px) {
     grid-template-columns: repeat(3, minmax(350px, 1fr));
     justify-content: center;
-    padding: 56px 5vw;
+    padding: 56px 6vw;
   }
 `;
 

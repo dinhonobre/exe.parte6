@@ -50,16 +50,16 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
   }
 `;
 
-
 export const Title = styled.h1`
   font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-size: 18px;
-  left: 170px;
   color: #e66767;
-  
+  margin-right: auto;
+
   @media (max-width: 768px) {
     font-size: 16px;
+    margin-right: 0;
   }
 `;
 
@@ -68,11 +68,14 @@ export const Carrinho = styled.p`
   font-weight: 900;
   font-size: 18px;
   color: #e66767;
+  margin-left: auto;
 
   @media (max-width: 768px) {
     font-size: 16px;
+    margin-left: 0;
   }
 `;
+
 
 export const Logo = styled.img`
   width: 125px;
@@ -94,16 +97,28 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  padding: 32px;
 
-    /* Para telas muito grandes */
-  @media (min-width: 1920px) {
-    max-width: 1600px;
-    margin: 0 auto;
+  @media (max-width: 768px) {
+    padding:0 16px;
   }
-  
 
   @media (max-width: 480px) {
     flex-direction: column;
     gap: 8px;
+    padding: 16px 12px;
+  }
+
+  @media (min-width: 1440px) {
+  max-width: 1200px; // ou 1280px
+  margin: 0 auto;
+}
+
+
+  @media (min-width: 1920px) {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0px;
   }
 `;
+

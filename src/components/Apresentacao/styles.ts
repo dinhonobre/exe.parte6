@@ -39,7 +39,7 @@ export const TextoTipo = styled.h4`
   color: #ffffff;
 
   @media (min-width: 1440px) {
-    left: 300px;
+    left: 160px;
   }
 
   @media (max-width: 1024px) {
@@ -71,7 +71,7 @@ export const TextoTitulo = styled.h2`
   margin-bottom: 32px;
 
   @media (min-width: 1440px) {
-    left: 300px;
+    left: 160px;
   }
 
   @media (max-width: 1024px) {
