@@ -82,7 +82,7 @@ export const BotaoConfirmar = styled.button`
   padding: 12px;
   background-color: #FFEBD9;
   color: #E66767;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
   cursor: pointer;
   font-size: 1rem;

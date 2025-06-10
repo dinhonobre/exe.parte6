@@ -12,7 +12,7 @@ export const Sidebar = styled.aside`
   z-index: 1100;
   padding: 20px;
   overflow-y: none; /* Corrige a propriedade de overflow */
-  
+
   /* Responsividade */
   @media (max-width: 768px) {
     width: 100%; /* Sidebar ocupa a tela inteira em dispositivos menores */
@@ -44,9 +44,8 @@ export const Item = styled.div`
   margin-bottom: 16px;
   position: relative;
   margin-right: 40px;
-  background: #FFEBD9;
+  background: #ffebd9;
 
-  
   /* Responsividade */
   @media (max-width: 768px) {
     width: 100%; /* Ocupa toda a largura da tela em dispositivos menores */
@@ -73,9 +72,9 @@ export const Titulo = styled.h3`
   color: #e66767;
   margin-top: 6px;
   padding: 0;
-  max-width: 200px;   /* limita a largura máxima do título */
+  max-width: 200px; /* limita a largura máxima do título */
   white-space: nowrap; /* impede quebra de linha */
-  overflow: hidden;    /* esconde o texto que ultrapassa */
+  overflow: hidden; /* esconde o texto que ultrapassa */
   text-overflow: ellipsis; /* adiciona "..." no final */
 `;
 
@@ -114,40 +113,40 @@ export const ValorTotalContainer = styled.div`
   font-family: Roboto;
   font-weight: 700;
   font-size: 14px;
-  color: #FFEBD9;
+  color: #ffebd9;
 `;
 
 export const ValorTotalTexto = styled.p`
   text-align: left;
   white-space: nowrap;
-  color: #FFEBD9;
+  color: #ffebd9;
+  fontsize: 14px;
+  font-weight: 700;
 `;
 
 export const ValorTotalValor = styled.p`
   text-align: right;
   white-space: nowrap;
-  color: #FFEBD9;
+  color: #ffebd9;
+  fontsize: 14px;
+  font-weight: 700;
 `;
 
-
 export const BotaoContinuar = styled.button`
+  margin-top: 24px;
   width: 100%;
-  height: 24px;
+  padding: 12px;
   background-color: #ffebd9;
   color: #e66767;
-  font-family: Roboto;
   font-weight: 700;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  text-align: center;
   border: none;
-  margin-top: 0px;
   cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
 
   &:hover {
     background-color: #d14d4d;
-    color: #FFEBD9;
+    color: #ffebd9;
   }
 
   /* Responsividade */
