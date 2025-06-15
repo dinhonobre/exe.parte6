@@ -97,7 +97,7 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 32px;
+  padding: 144px;
 
   @media (max-width: 768px) {
     padding:0 16px;
@@ -110,7 +110,7 @@ export const ContentWrapper = styled.div`
   }
 
   @media (min-width: 1440px) {
-  max-width: 1200px; // ou 1280px
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -118,7 +118,7 @@ export const ContentWrapper = styled.div`
   @media (min-width: 1920px) {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0px;
+    padding: 288px;
   }
 `;
 

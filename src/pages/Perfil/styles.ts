@@ -49,21 +49,28 @@ export const Overlay = styled.div`
 
 export const ProdutoContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 320px));
+  grid-template-columns: repeat(3, 320px); /* 3 cards de 320px que bate com o Figma */
   gap: 32px;
   padding: 56px 40px;
-  max-width: calc(2560px - 2 * 170px);
-  margin: 0 auto;
+  max-width: 1024px; /* largura fixa igual ao Figma */
+  margin: 0 auto; /* centraliza na tela */
   background: #FFF8F2;
   width: 100%;
   box-sizing: border-box;
   justify-items: center;
-  padding: 56px 40px;
-
-@media (max-width: 768px) {
+  height: 708px; /* altura fixa igual ao Figma */
+  
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
     padding: 20px;
+    height: auto; /* altura automática para mobile */
   }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    grid-template-columns: repeat(2, 320px);
+    height: auto;
+  }
+
 
   @media (min-width: 1024px) and (max-width: 1279px) {
     grid-template-columns: repeat(2, 1fr); /* 2 colunas entre 1024 e 1279 */
@@ -71,7 +78,7 @@ export const ProdutoContainer = styled.div`
   }
 
   @media (min-width: 1280px) {
-    grid-template-columns: repeat(3, minmax(350px, 1fr));
+    grid-template-columns: repeat(3, 320px);
     justify-content: center;
     padding: 56px 6vw;
   }
