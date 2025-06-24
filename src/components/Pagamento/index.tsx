@@ -1,17 +1,27 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
-  TopoPagamento, Valor, BotaoConfirmar, BotaoVoltar, Campo, CampoMenor,
-  Form, LinhaDupla, Overlay, SidebarEntrega, Titulo, Label
-} from "./styles"
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
-import axios from 'axios'
+  TopoPagamento,
+  Valor,
+  BotaoConfirmar,
+  BotaoVoltar,
+  Campo,
+  CampoMenor,
+  Form,
+  LinhaDupla,
+  Overlay,
+  SidebarEntrega,
+  Titulo,
+  Label,
+} from "./styles";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import axios from "axios";
 
 type Props = {
-  onFecharPagamento: () => void
-  onVoltarParaEntrega: () => void
-  onPedidoConfirmado: (id: string) => void
-}
+  onFecharPagamento: () => void;
+  onVoltarParaEntrega: () => void;
+  onPedidoConfirmado: (id: string) => void;
+};
 
 interface RespostaPedido {
   orderId: string;
@@ -20,24 +30,27 @@ interface RespostaPedido {
 const Pagamento: React.FC<Props> = ({
   onFecharPagamento,
   onVoltarParaEntrega,
-  onPedidoConfirmado
+  onPedidoConfirmado,
 }) => {
-  const itensCarrinho = useSelector((state: RootState) => state.carrinho.itens)
+  const itensCarrinho = useSelector((state: RootState) => state.carrinho.itens);
 
-  const total = itensCarrinho.reduce((soma, item) => soma + Number(item.preco), 0)
+  const total = itensCarrinho.reduce(
+    (soma, item) => soma + Number(item.preco),
+    0
+  );
 
   // Estados dos campos
-  const [nome, setNome] = useState('')
-  const [numero, setNumero] = useState('')
-  const [cvv, setCvv] = useState('')
-  const [mes, setMes] = useState('')
-  const [ano, setAno] = useState('')
+  const [nome, setNome] = useState("");
+  const [numero, setNumero] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [mes, setMes] = useState("");
+  const [ano, setAno] = useState("");
 
   const enviarPedido = async () => {
     // Validação dos campos obrigatórios
     if (!nome || !numero || !cvv || !mes || !ano) {
-      alert("Por favor, preencha todos os campos obrigatórios do pagamento.")
-      return
+      alert("Por favor, preencha todos os campos obrigatórios do pagamento.");
+      return;
     }
 
     const pedido = {
@@ -92,16 +105,20 @@ const Pagamento: React.FC<Props> = ({
               <Label htmlFor="numeroCartao">Número do Cartão</Label>
               <Campo
                 id="numeroCartao"
+                inputMode="numeric"
+                pattern="\d*"
                 value={numero}
-                onChange={(e) => setNumero(e.target.value)}
+                onChange={(e) => setNumero(e.target.value.replace(/\D/g, ""))}
               />
             </div>
-            <div style={{ flex: 1, marginLeft: '8px' }}>
+            <div style={{ flex: 1, marginLeft: "8px" }}>
               <Label htmlFor="cvv">CVV</Label>
               <Campo
                 id="cvv"
+                inputMode="numeric"
+                pattern="\d*"
                 value={cvv}
-                onChange={(e) => setCvv(e.target.value)}
+                onChange={(e) => setCvv(e.target.value.replace(/\D/g, ""))}
               />
             </div>
           </LinhaDupla>
@@ -111,16 +128,20 @@ const Pagamento: React.FC<Props> = ({
               <Label htmlFor="mes">Mês de vencimento</Label>
               <CampoMenor
                 id="mes"
+                inputMode="numeric"
+                pattern="\d*"
                 value={mes}
-                onChange={(e) => setMes(e.target.value)}
+                onChange={(e) => setMes(e.target.value.replace(/\D/g, ""))}
               />
             </div>
-            <div style={{ flex: 1, marginLeft: '8px' }}>
+            <div style={{ flex: 1, marginLeft: "8px" }}>
               <Label htmlFor="ano">Ano de vencimento</Label>
               <CampoMenor
                 id="ano"
+                inputMode="numeric"
+                pattern="\d*"
                 value={ano}
-                onChange={(e) => setAno(e.target.value)}
+                onChange={(e) => setAno(e.target.value.replace(/\D/g, ""))}
               />
             </div>
           </LinhaDupla>
@@ -134,7 +155,7 @@ const Pagamento: React.FC<Props> = ({
         </Form>
       </SidebarEntrega>
     </Overlay>
-  )
-}
+  );
+};
 
-export default Pagamento
+export default Pagamento;

@@ -36,7 +36,7 @@ const CardPerfil = ({
   };
 
   return (
-      <Card>
+    <Card>
       <div style={{ position: "relative" }}>
         <CardImagem
           src={imagem || "https://via.placeholder.com/300x200?text=Sem+Imagem"}
@@ -45,7 +45,7 @@ const CardPerfil = ({
       </div>
       <CardTitulo>{titulo}</CardTitulo>
       <CardDescricao>{descricao}</CardDescricao>
-      <div style={{ display: "flex", gap: "10px" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <CardBotao onClick={handleClick}>Adicionar ao carrinho</CardBotao>
       </div>
     </Card>

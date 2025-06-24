@@ -9,7 +9,7 @@ import {
   LinhaDupla,
   Overlay,
   SidebarEntrega,
-  Titulo
+  Titulo,
 } from "./styles";
 
 type Props = {
@@ -18,12 +18,12 @@ type Props = {
 };
 
 const Entrega: React.FC<Props> = ({ onVoltar, onContinuarPagamento }) => {
-  const [nome, setNome] = useState('');
-  const [endereco, setEndereco] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [cep, setCep] = useState('');
-  const [numero, setNumero] = useState('');
-  const [complemento, setComplemento] = useState('');
+  const [nome, setNome] = useState("");
+  const [endereco, setEndereco] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [cep, setCep] = useState("");
+  const [numero, setNumero] = useState("");
+  const [complemento, setComplemento] = useState("");
 
   const validarEntrega = () => {
     if (!nome || !endereco || !cidade || !cep || !numero) {
@@ -65,16 +65,20 @@ const Entrega: React.FC<Props> = ({ onVoltar, onContinuarPagamento }) => {
               <Label htmlFor="cep">CEP</Label>
               <CampoMenor
                 id="cep"
+                inputMode="numeric"
+                pattern="\d*"
                 value={cep}
-                onChange={(e) => setCep(e.target.value)}
+                onChange={(e) => setCep(e.target.value.replace(/\D/g, ""))}
               />
             </div>
             <div>
               <Label htmlFor="numero">Número</Label>
               <CampoMenor
                 id="numero"
+                inputMode="numeric"
+                pattern="\d*"
                 value={numero}
-                onChange={(e) => setNumero(e.target.value)}
+                onChange={(e) => setNumero(e.target.value.replace(/\D/g, ""))}
               />
             </div>
           </LinhaDupla>

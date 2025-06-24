@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
-  width: 320px;
+  width: 304px;
   height: 338px;
   background: #e66767;
   border: 1px solid #e66767;
@@ -15,13 +15,6 @@ export const Card = styled.div`
   @media (max-width: 360px) {
     width: 100%;
   }
-`;
-
-export const CardImagem = styled.img`
-  width: 100%;
-  height: 167px;
-  object-fit: cover;
-  flex-shrink: 0;
 `;
 
 export const CardDescricao = styled.p`
@@ -66,21 +59,11 @@ export const CardTitulo = styled.h3`
   padding-bottom: 8px;
 `;
 
-export const Categoria = styled.span`
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  min-width: 61px;
-  height: 26px;
-  font-family: Roboto, sans-serif;
-  font-weight: 700;
-  font-size: 0.75rem;
-  background-color: #e66767;
-  color: #ffebd9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  padding: 0 8px;
-  line-height: 1;
+
+
+export const CardImagem = styled.img`
+  width: 100%;
+  height: 167px;
+  object-fit: cover;
+  flex-shrink: 0;
 `;
