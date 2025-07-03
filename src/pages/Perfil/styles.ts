@@ -49,40 +49,36 @@ export const Overlay = styled.div`
 
 export const ProdutoContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 320px); /* 3 cards de 320px que bate com o Figma */
+  grid-template-columns: repeat(3, 320px); /* layout fixo para telas grandes */
   gap: 32px;
   padding: 56px 40px;
-  max-width: 1024px; /* largura fixa igual ao Figma */
-  margin: 0 auto; /* centraliza na tela */
-  background: #FFF8F2;
   width: 100%;
+  max-width: 1024px; /* largura conforme Figma */
+  margin:0 auto ; /* top: 498px simulando posição */
+  background: #fff8f2;
   box-sizing: border-box;
   justify-items: center;
-  height: 708px; /* altura fixa igual ao Figma */
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     padding: 20px;
-    height: auto; /* altura automática para mobile */
+    height: auto; /* altura flexível no mobile */
+    margin-top: 64px; /* reduzido para visual harmonioso */
   }
-  
+
   @media (min-width: 769px) and (max-width: 1024px) {
     grid-template-columns: repeat(2, 320px);
     height: auto;
-  }
-
-
-  @media (min-width: 1024px) and (max-width: 1279px) {
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas entre 1024 e 1279 */
-    padding: 40px; /* padding menor para caber melhor */
+    padding: 40px 24px;
   }
 
   @media (min-width: 1280px) {
-    grid-template-columns: repeat(3, 320px);
-    justify-content: center;
     padding: 56px 6vw;
+    justify-content: center;
+    grid-template-columns: repeat(3, 320px); /* mantém padrão do Figma */
   }
 `;
+
 
 
 export const Rodape = styled.footer`

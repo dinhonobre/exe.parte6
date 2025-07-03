@@ -47,9 +47,30 @@ const Pagamento: React.FC<Props> = ({
   const [ano, setAno] = useState("");
 
   const enviarPedido = async () => {
-    // Validação dos campos obrigatórios
-    if (!nome || !numero || !cvv || !mes || !ano) {
-      alert("Por favor, preencha todos os campos obrigatórios do pagamento.");
+    // Validações específicas
+    if (!nome.trim()) {
+      alert("Por favor, preencha o nome no cartão.");
+      return;
+    }
+
+    if (numero.length !== 16) {
+      alert("O número do cartão deve conter exatamente 16 dígitos.");
+      return;
+    }
+
+    if (cvv.length !== 3) {
+      alert("O CVV deve conter exatamente 3 dígitos.");
+      return;
+    }
+
+    const mesNum = Number(mes);
+    if (mes.length !== 2 || mesNum < 1 || mesNum > 12) {
+      alert("O mês de vencimento deve ser um número entre 01 e 12.");
+      return;
+    }
+
+    if (ano.length !== 4 || Number(ano) < new Date().getFullYear()) {
+      alert("O ano de vencimento deve conter 4 dígitos válidos.");
       return;
     }
 
@@ -64,7 +85,7 @@ const Pagamento: React.FC<Props> = ({
           number: numero,
           code: Number(cvv),
           expires: {
-            month: Number(mes),
+            month: mesNum,
             year: Number(ano),
           },
         },
@@ -107,8 +128,13 @@ const Pagamento: React.FC<Props> = ({
                 id="numeroCartao"
                 inputMode="numeric"
                 pattern="\d*"
+                maxLength={19} // 16 dígitos + 3 espaços
                 value={numero}
-                onChange={(e) => setNumero(e.target.value.replace(/\D/g, ""))}
+                onChange={(e) => {
+                  let valor = e.target.value.replace(/\D/g, "").slice(0, 16);
+                  valor = valor.replace(/(.{4})/g, "$1 ").trim();
+                  setNumero(valor);
+                }}
               />
             </div>
             <div style={{ flex: 1, marginLeft: "8px" }}>
@@ -117,6 +143,7 @@ const Pagamento: React.FC<Props> = ({
                 id="cvv"
                 inputMode="numeric"
                 pattern="\d*"
+                maxLength={3}
                 value={cvv}
                 onChange={(e) => setCvv(e.target.value.replace(/\D/g, ""))}
               />
@@ -130,6 +157,7 @@ const Pagamento: React.FC<Props> = ({
                 id="mes"
                 inputMode="numeric"
                 pattern="\d*"
+                maxLength={2}
                 value={mes}
                 onChange={(e) => setMes(e.target.value.replace(/\D/g, ""))}
               />
@@ -140,6 +168,7 @@ const Pagamento: React.FC<Props> = ({
                 id="ano"
                 inputMode="numeric"
                 pattern="\d*"
+                maxLength={4}
                 value={ano}
                 onChange={(e) => setAno(e.target.value.replace(/\D/g, ""))}
               />
