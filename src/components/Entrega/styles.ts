@@ -17,7 +17,7 @@ export const SidebarEntrega = styled.div`
   width: 100%;
   max-width: 400px;
   height: 100%;
-  padding: 32px;
+  padding: 16px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -79,7 +79,7 @@ export const Label = styled.label`
 
 export const BotaoConfirmar = styled.button`
   margin-top: 24px;
-  padding: 12px;
+  padding: 6px;
   background-color: #FFEBD9;
   color: #E66767;
   font-weight: 700;
