@@ -94,7 +94,7 @@ const Pagamento: React.FC<Props> = ({
 
     try {
       const resposta = await axios.post<RespostaPedido>(
-        "https://fake-api-tau.vercel.app/api/efood/checkout",
+        "https://ebac-fake-api.vercel.app/api/efood/checkout",
         pedido
       );
       console.log("Pedido confirmado:", resposta.data);

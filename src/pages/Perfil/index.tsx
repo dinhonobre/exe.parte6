@@ -53,14 +53,14 @@ const Perfil = () => {
   useEffect(() => {
     const fetchRestaurante = async () => {
       try {
-        const response = await fetch(
-          `https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`
-        );
-        const data = await response.json();
-        setRestaurante(data);
-        if (data.cardapio) {
-          setProdutos(data.cardapio);
-        }
+        const response = await fetch('https://ebac-fake-api.vercel.app/api/efood/restaurantes');
+const data = await response.json();
+const restauranteSelecionado = data.find((r: any) => r.id === Number(id));
+setRestaurante(restauranteSelecionado);
+if (restauranteSelecionado?.cardapio) {
+  setProdutos(restauranteSelecionado.cardapio);
+}
+
       } catch (error) {
         console.error("Erro ao carregar restaurante. Tente novamente mais tarde.", error);
       }
