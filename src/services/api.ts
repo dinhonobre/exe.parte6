@@ -1,6 +1,6 @@
 import { Restaurante } from '../types';
 
-const API_BASE_URL = 'https://fake-api-tau.vercel.app/api/efood';
+const API_BASE_URL = 'https://ebac-fake-api.vercel.app/api/efood';
 
 export const getRestaurantes = async (): Promise<Restaurante[]> => {
   try {

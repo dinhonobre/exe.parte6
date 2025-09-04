@@ -53,10 +53,13 @@ const Pagamento: React.FC<Props> = ({
       return;
     }
 
-    if (numero.length !== 16) {
-      alert("O número do cartão deve conter exatamente 16 dígitos.");
-      return;
-    }
+    const numeroLimpo = numero.replace(/\s/g, ""); // remove espaços
+
+if (numeroLimpo.length !== 16) {
+  alert("O número do cartão deve conter exatamente 16 dígitos.");
+  return;
+}
+
 
     if (cvv.length !== 3) {
       alert("O CVV deve conter exatamente 3 dígitos.");

@@ -51,23 +51,29 @@ const Perfil = () => {
   const [restaurante, setRestaurante] = useState<any>(null);
 
   useEffect(() => {
-    const fetchRestaurante = async () => {
-      try {
-        const response = await fetch('https://ebac-fake-api.vercel.app/api/efood/restaurantes');
-const data = await response.json();
-const restauranteSelecionado = data.find((r: any) => r.id === Number(id));
-setRestaurante(restauranteSelecionado);
-if (restauranteSelecionado?.cardapio) {
-  setProdutos(restauranteSelecionado.cardapio);
-}
+  const fetchRestaurante = async () => {
+    try {
+      const response = await fetch(
+        `https://ebac-fake-api.vercel.app/api/efood/restaurantes`
+      );
+      const data = await response.json();
 
-      } catch (error) {
-        console.error("Erro ao carregar restaurante. Tente novamente mais tarde.", error);
+      const restauranteEncontrado = data.find(
+        (item: any) => String(item.id) === String(id)
+      );
+
+      setRestaurante(restauranteEncontrado || null);
+      if (restauranteEncontrado?.cardapio) {
+        setProdutos(restauranteEncontrado.cardapio);
       }
-    };
+    } catch (error) {
+      console.error("Erro ao carregar restaurante:", error);
+    }
+  };
 
-    fetchRestaurante();
-  }, [id]);
+  fetchRestaurante();
+}, [id]);
+
 
   const adicionarAoCarrinhoRedux = (produto: Produto) => {
     if (!produto) return;
