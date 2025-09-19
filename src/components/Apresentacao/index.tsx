@@ -1,17 +1,17 @@
 import React from 'react'
 import { Container, TextoTipo, TextoTitulo } from './styles'
-import imagemApresentacao from '../../assets/apresentacao.png'
 
 type Props = {
   tipo: string
   nome: string
+  capa: string   // adiciona a prop imagem
 }
 
-const Apresentacao = ({ tipo, nome }: Props) => (
+const Apresentacao = ({ tipo, nome, capa }: Props) => (
   <Container>
     <TextoTipo>{tipo}</TextoTipo>
     <TextoTitulo>{nome}</TextoTitulo>
-    <img src={imagemApresentacao} alt="Imagem de Apresentação" />
+    <img src={capa} alt={`Imagem de ${nome}`} />
   </Container>
 )
 

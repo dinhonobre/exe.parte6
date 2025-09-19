@@ -118,16 +118,22 @@ const Perfil = () => {
   const fecharCarrinho = () => {
     setCarrinhoAberto(false);
   };
+console.log(restaurante)
 
   return (
     <>
       <PerfilHeader />
 
       {restaurante ? (
-        <Apresentacao tipo={restaurante.tipo} nome={restaurante.titulo} />
-      ) : (
-        <p>Carregando restaurante...</p>
-      )}
+  <Apresentacao
+    tipo={restaurante.tipo}
+    nome={restaurante.titulo}
+    capa={restaurante.capa}   // 👈 passa a capa do restaurante
+  />
+) : (
+  <p>Carregando restaurante...</p>
+)}
+
 
       {carrinhoAberto &&
         !mostrarEntrega &&
